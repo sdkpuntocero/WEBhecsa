@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="15da6f59bc6146b1820487bff57aacd6" Name="Diagram1">
+        <EntityTypeShape EntityType="DatosHECSAModel.CorreoNotificacion" Width="1.5" PointX="7.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.DatosFiscale" Width="1.5" PointX="10.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.Empresa" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.Genero" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.InventariosProducto" Width="1.5" PointX="9.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.MexCP" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.Producto" Width="1.5" PointX="7.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.Proveedore" Width="1.5" PointX="7.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.ProveedoresContacto" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.RolesUsuario" Width="1.5" PointX="8.25" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.TiposProveedore" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.TiposUbicacione" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.TiposUsuario" Width="1.5" PointX="8.25" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.Ubicacione" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatosHECSAModel.Usuario" Width="1.5" PointX="10.5" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="DatosHECSAModel.FK_CorreoNotificacion_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_DatosFiscales_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_DatosFiscales_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Empresas_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Productos_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Proveedores_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_Generos" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_InventariosProductos_Productos" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Ubicaciones_MexCP" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Proveedores_TiposProveedores" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Proveedores_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_ProveedoresContactos_Proveedores" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_RolesUsuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Ubicaciones_TiposUbicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_TiposUsuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_Ubicaciones" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
