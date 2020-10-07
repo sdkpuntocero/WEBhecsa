@@ -433,8 +433,8 @@
     <Content Include="index.html" />
     <Content Include="Models\ModeloDatos.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModeloDatos.Context.cs</LastGenOutput>
       <DependentUpon>ModeloDatos.edmx</DependentUpon>
+      <LastGenOutput>ModeloDatos.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\ModeloDatos.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -473,6 +473,13 @@
     <Content Include="assets\vendors\perfect-scrollbar\perfect-scrollbar.min.js.map" />
     <Content Include="assets\vendors\quill\quill.min.js.map" />
     <Content Include="mix-manifest.json" />
+    <EntityDeploy Include="Models\ModeloDatos.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModeloDatos.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModeloDatos.edmx.diagram">
+      <DependentUpon>ModeloDatos.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -570,22 +577,29 @@
     <Compile Include="Acceso.aspx.designer.cs">
       <DependentUpon>Acceso.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Clases\CodigoPostal.cs" />
+    <Compile Include="Clases\ControlEmpresa.cs" />
+    <Compile Include="Clases\ControlUsuarios.cs" />
+    <Compile Include="Clases\Encrypta.cs" />
+    <Compile Include="Clases\EnviarCorreo.cs" />
+    <Compile Include="Clases\IzquierdaMedioDerecha.cs" />
+    <Compile Include="Clases\RemueveCaracteresEspeciales.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CorreoNotificacion.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DatosFiscale.cs">
+    <Compile Include="Models\DatosFiscales.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Empresa.cs">
+    <Compile Include="Models\Empresas.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Genero.cs">
+    <Compile Include="Models\Generos.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\InventariosProducto.cs">
+    <Compile Include="Models\InventariosProductos.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MexCP.cs">
@@ -606,31 +620,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloDatos.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Producto.cs">
+    <Compile Include="Models\Productos.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Proveedore.cs">
+    <Compile Include="Models\Proveedores.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProveedoresContacto.cs">
+    <Compile Include="Models\ProveedoresContactos.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RolesUsuario.cs">
+    <Compile Include="Models\RolesUsuarios.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TiposProveedore.cs">
+    <Compile Include="Models\TiposProveedores.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TiposUbicacione.cs">
+    <Compile Include="Models\TiposUbicaciones.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TiposUsuario.cs">
+    <Compile Include="Models\TiposUsuarios.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ubicacione.cs">
+    <Compile Include="Models\Ubicaciones.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Usuario.cs">
+    <Compile Include="Models\Usuarios.cs">
       <DependentUpon>ModeloDatos.tt</DependentUpon>
     </Compile>
     <Compile Include="Panel.aspx.cs">
@@ -651,13 +665,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="libman.json" />
-    <EntityDeploy Include="Models\ModeloDatos.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModeloDatos.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ModeloDatos.edmx.diagram">
-      <DependentUpon>ModeloDatos.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.5.1.min.map" />
@@ -671,7 +678,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\images\avatar\" />
-    <Folder Include="Clases\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

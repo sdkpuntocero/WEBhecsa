@@ -12,18 +12,18 @@ namespace WEBhecsa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TiposProveedore
+    public partial class TiposProveedores
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TiposProveedore()
+        public TiposProveedores()
         {
-            this.Proveedores = new HashSet<Proveedore>();
+            this.Proveedores = new HashSet<Proveedores>();
         }
     
         public int TipoProveedorID { get; set; }
         public string Proveedor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proveedore> Proveedores { get; set; }
+        public virtual ICollection<Proveedores> Proveedores { get; set; }
     }
 }

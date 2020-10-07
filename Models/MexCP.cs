@@ -17,7 +17,7 @@ namespace WEBhecsa.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MexCP()
         {
-            this.Ubicaciones = new HashSet<Ubicacione>();
+            this.Ubicaciones = new HashSet<Ubicaciones>();
         }
     
         public string d_codigo { get; set; }
@@ -37,6 +37,6 @@ namespace WEBhecsa.Models
         public string c_cve_ciudad { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ubicacione> Ubicaciones { get; set; }
+        public virtual ICollection<Ubicaciones> Ubicaciones { get; set; }
     }
 }

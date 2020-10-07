@@ -23,8 +23,8 @@ namespace WEBhecsa.Models
         public int Puerto { get; set; }
         public int EstatusRegistroID { get; set; }
         public System.DateTime FechaRegistro { get; set; }
-        public Nullable<int> EmpresaID { get; set; }
+        public System.Guid EmpresaID { get; set; }
     
-        public virtual Empresa Empresa { get; set; }
+        public virtual Empresas Empresas { get; set; }
     }
 }

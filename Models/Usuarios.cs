@@ -12,7 +12,7 @@ namespace WEBhecsa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario
+    public partial class Usuarios
     {
         public System.Guid UsuarioID { get; set; }
         public int RolUsuarioID { get; set; }
@@ -22,7 +22,7 @@ namespace WEBhecsa.Models
         public string Nombres { get; set; }
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
-        public string Usuario1 { get; set; }
+        public string Usuario { get; set; }
         public string Clave { get; set; }
         public string CodigoUsuario { get; set; }
         public string CorreoPersonal { get; set; }
@@ -33,12 +33,12 @@ namespace WEBhecsa.Models
         public System.DateTime FechaRegistro { get; set; }
         public int EstatusRegistroID { get; set; }
         public string Token { get; set; }
-        public int EmpresaID { get; set; }
+        public System.Guid EmpresaID { get; set; }
     
-        public virtual Empresa Empresa { get; set; }
-        public virtual Genero Genero { get; set; }
-        public virtual RolesUsuario RolesUsuario { get; set; }
-        public virtual TiposUsuario TiposUsuario { get; set; }
-        public virtual Ubicacione Ubicacione { get; set; }
+        public virtual Empresas Empresas { get; set; }
+        public virtual Generos Generos { get; set; }
+        public virtual RolesUsuarios RolesUsuarios { get; set; }
+        public virtual TiposUsuarios TiposUsuarios { get; set; }
+        public virtual Ubicaciones Ubicaciones { get; set; }
     }
 }

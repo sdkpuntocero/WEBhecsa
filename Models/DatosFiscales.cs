@@ -12,7 +12,7 @@ namespace WEBhecsa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DatosFiscale
+    public partial class DatosFiscales
     {
         public System.Guid DatoFiscalID { get; set; }
         public string RFC { get; set; }
@@ -21,9 +21,10 @@ namespace WEBhecsa.Models
         public string Telefono { get; set; }
         public Nullable<System.Guid> UbicacionID { get; set; }
         public int EstatusRegistroID { get; set; }
-        public int EmpresaID { get; set; }
+        public System.DateTime FechaRegistro { get; set; }
+        public System.Guid EmpresaID { get; set; }
     
-        public virtual Empresa Empresa { get; set; }
-        public virtual Ubicacione Ubicacione { get; set; }
+        public virtual Empresas Empresas { get; set; }
+        public virtual Ubicaciones Ubicaciones { get; set; }
     }
 }

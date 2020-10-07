@@ -25,20 +25,20 @@ namespace WEBhecsa.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CorreoNotificacion> CorreoNotificacions { get; set; }
-        public virtual DbSet<DatosFiscale> DatosFiscales { get; set; }
-        public virtual DbSet<Empresa> Empresas { get; set; }
-        public virtual DbSet<Genero> Generos { get; set; }
-        public virtual DbSet<InventariosProducto> InventariosProductos { get; set; }
-        public virtual DbSet<MexCP> MexCPs { get; set; }
-        public virtual DbSet<Producto> Productos { get; set; }
-        public virtual DbSet<Proveedore> Proveedores { get; set; }
-        public virtual DbSet<ProveedoresContacto> ProveedoresContactos { get; set; }
-        public virtual DbSet<RolesUsuario> RolesUsuarios { get; set; }
-        public virtual DbSet<TiposProveedore> TiposProveedores { get; set; }
-        public virtual DbSet<TiposUbicacione> TiposUbicaciones { get; set; }
-        public virtual DbSet<TiposUsuario> TiposUsuarios { get; set; }
-        public virtual DbSet<Ubicacione> Ubicaciones { get; set; }
-        public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<CorreoNotificacion> CorreoNotificacion { get; set; }
+        public virtual DbSet<DatosFiscales> DatosFiscales { get; set; }
+        public virtual DbSet<Empresas> Empresas { get; set; }
+        public virtual DbSet<Generos> Generos { get; set; }
+        public virtual DbSet<InventariosProductos> InventariosProductos { get; set; }
+        public virtual DbSet<MexCP> MexCP { get; set; }
+        public virtual DbSet<Productos> Productos { get; set; }
+        public virtual DbSet<Proveedores> Proveedores { get; set; }
+        public virtual DbSet<ProveedoresContactos> ProveedoresContactos { get; set; }
+        public virtual DbSet<RolesUsuarios> RolesUsuarios { get; set; }
+        public virtual DbSet<TiposProveedores> TiposProveedores { get; set; }
+        public virtual DbSet<TiposUbicaciones> TiposUbicaciones { get; set; }
+        public virtual DbSet<TiposUsuarios> TiposUsuarios { get; set; }
+        public virtual DbSet<Ubicaciones> Ubicaciones { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
     }
 }

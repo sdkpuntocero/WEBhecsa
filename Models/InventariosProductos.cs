@@ -12,7 +12,7 @@ namespace WEBhecsa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class InventariosProducto
+    public partial class InventariosProductos
     {
         public int InventarioProducto { get; set; }
         public Nullable<decimal> Costo { get; set; }
@@ -22,6 +22,6 @@ namespace WEBhecsa.Models
         public Nullable<System.DateTime> FechaRegistro { get; set; }
         public System.Guid ProductoID { get; set; }
     
-        public virtual Producto Producto { get; set; }
+        public virtual Productos Productos { get; set; }
     }
 }

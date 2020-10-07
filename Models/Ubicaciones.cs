@@ -12,35 +12,34 @@ namespace WEBhecsa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Empresa
+    public partial class Ubicaciones
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Empresa()
+        public Ubicaciones()
         {
-            this.CorreoNotificacions = new HashSet<CorreoNotificacion>();
-            this.DatosFiscales = new HashSet<DatosFiscale>();
-            this.Productos = new HashSet<Producto>();
-            this.Proveedores = new HashSet<Proveedore>();
-            this.Usuarios = new HashSet<Usuario>();
+            this.DatosFiscales = new HashSet<DatosFiscales>();
+            this.Empresas = new HashSet<Empresas>();
+            this.Proveedores = new HashSet<Proveedores>();
+            this.Usuarios = new HashSet<Usuarios>();
         }
     
-        public int EmpresaID { get; set; }
-        public string NombreEmpresa { get; set; }
-        public string CorreoElectronico { get; set; }
-        public string Telefono { get; set; }
-        public Nullable<System.Guid> UbicacionID { get; set; }
+        public System.Guid UbicacionID { get; set; }
+        public Nullable<int> TipoUbicacionID { get; set; }
+        public string CalleNumero { get; set; }
+        public string CodigoPostal { get; set; }
+        public string ColoniaID { get; set; }
         public int EstatusRegistroID { get; set; }
+        public System.DateTime FechaRegistro { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CorreoNotificacion> CorreoNotificacions { get; set; }
+        public virtual ICollection<DatosFiscales> DatosFiscales { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DatosFiscale> DatosFiscales { get; set; }
-        public virtual Ubicacione Ubicacione { get; set; }
+        public virtual ICollection<Empresas> Empresas { get; set; }
+        public virtual MexCP MexCP { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Producto> Productos { get; set; }
+        public virtual ICollection<Proveedores> Proveedores { get; set; }
+        public virtual TiposUbicaciones TiposUbicaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proveedore> Proveedores { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<Usuarios> Usuarios { get; set; }
     }
 }

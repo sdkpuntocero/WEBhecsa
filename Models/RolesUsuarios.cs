@@ -12,25 +12,20 @@ namespace WEBhecsa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Producto
+    public partial class RolesUsuarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Producto()
+        public RolesUsuarios()
         {
-            this.InventariosProductos = new HashSet<InventariosProducto>();
+            this.Usuarios = new HashSet<Usuarios>();
         }
     
-        public System.Guid ProductoID { get; set; }
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public string MarcaID { get; set; }
-        public string CategoriaID { get; set; }
-        public string UnidadMedida { get; set; }
-        public int EmpresaID { get; set; }
+        public int RolUsuarioID { get; set; }
+        public string RolUsuario { get; set; }
+        public Nullable<int> EstatusRegistroID { get; set; }
+        public Nullable<System.DateTime> FechaRegistro { get; set; }
     
-        public virtual Empresa Empresa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InventariosProducto> InventariosProductos { get; set; }
+        public virtual ICollection<Usuarios> Usuarios { get; set; }
     }
 }

@@ -12,12 +12,12 @@ namespace WEBhecsa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TiposUbicacione
+    public partial class TiposUbicaciones
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TiposUbicacione()
+        public TiposUbicaciones()
         {
-            this.Ubicaciones = new HashSet<Ubicacione>();
+            this.Ubicaciones = new HashSet<Ubicaciones>();
         }
     
         public int TipoUbicacionID { get; set; }
@@ -26,6 +26,6 @@ namespace WEBhecsa.Models
         public Nullable<System.DateTime> FechaRegistro { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ubicacione> Ubicaciones { get; set; }
+        public virtual ICollection<Ubicaciones> Ubicaciones { get; set; }
     }
 }

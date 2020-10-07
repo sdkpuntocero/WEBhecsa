@@ -12,7 +12,7 @@ namespace WEBhecsa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ProveedoresContacto
+    public partial class ProveedoresContactos
     {
         public System.Guid ProveedorContactoID { get; set; }
         public string Nombres { get; set; }
@@ -27,6 +27,6 @@ namespace WEBhecsa.Models
         public int EstatusRegistroID { get; set; }
         public System.Guid ProveedoresID { get; set; }
     
-        public virtual Proveedore Proveedore { get; set; }
+        public virtual Proveedores Proveedores { get; set; }
     }
 }

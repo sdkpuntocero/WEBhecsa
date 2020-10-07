@@ -12,12 +12,12 @@ namespace WEBhecsa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Proveedore
+    public partial class Proveedores
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Proveedore()
+        public Proveedores()
         {
-            this.ProveedoresContactos = new HashSet<ProveedoresContacto>();
+            this.ProveedoresContactos = new HashSet<ProveedoresContactos>();
         }
     
         public System.Guid ProveedoresID { get; set; }
@@ -25,15 +25,15 @@ namespace WEBhecsa.Models
         public string NombresRS { get; set; }
         public string CorreoElectronico { get; set; }
         public string Telefono { get; set; }
-        public int EmpresaID { get; set; }
         public Nullable<System.Guid> UbicacionID { get; set; }
         public System.DateTime FechaRegistro { get; set; }
         public int EstatusRegistroID { get; set; }
+        public System.Guid EmpresaID { get; set; }
     
-        public virtual Empresa Empresa { get; set; }
-        public virtual TiposProveedore TiposProveedore { get; set; }
-        public virtual Ubicacione Ubicacione { get; set; }
+        public virtual Empresas Empresas { get; set; }
+        public virtual TiposProveedores TiposProveedores { get; set; }
+        public virtual Ubicaciones Ubicaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProveedoresContacto> ProveedoresContactos { get; set; }
+        public virtual ICollection<ProveedoresContactos> ProveedoresContactos { get; set; }
     }
 }

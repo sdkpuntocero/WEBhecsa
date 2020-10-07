@@ -12,20 +12,20 @@ namespace WEBhecsa.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Genero
+    public partial class TiposUsuarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Genero()
+        public TiposUsuarios()
         {
-            this.Usuarios = new HashSet<Usuario>();
+            this.Usuarios = new HashSet<Usuarios>();
         }
     
-        public int GeneroID { get; set; }
-        public string Genero1 { get; set; }
+        public int TipoUsuarioID { get; set; }
+        public string TipoUsuario { get; set; }
         public Nullable<int> EstatusRegistroID { get; set; }
         public Nullable<System.DateTime> FechaRegistro { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<Usuarios> Usuarios { get; set; }
     }
 }
