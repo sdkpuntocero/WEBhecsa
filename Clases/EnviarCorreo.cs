@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net.Mail;
 using System.Web;
 using WEBhecsa.Models;
@@ -36,6 +34,7 @@ namespace WEBhecsa.Clases
 
             return true;
         }
+
         public static string Cuerpo(string Titulo, string Detalle, string NombreUsuario, string Usuario, string Clave, string RutaTemplate, DateTime FechaRegistro, string Contacto)
 
         {
@@ -99,7 +98,6 @@ namespace WEBhecsa.Clases
                 try
                 {
                     smtp.Send(mailMessage);
-
 
                     return true;
                 }
