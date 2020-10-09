@@ -5,38 +5,38 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7b0e0bb313fb4777b109c1f537084040" Name="Diagram1">
-        <EntityTypeShape EntityType="DatosHECSAModel.CorreoNotificacion" Width="1.5" PointX="7.5" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.DatosFiscales" Width="1.5" PointX="10.5" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.Empresas" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.Generos" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.InventariosProductos" Width="1.5" PointX="9.75" PointY="17.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.MexCP" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.Productos" Width="1.5" PointX="7.5" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.Proveedores" Width="1.5" PointX="7.5" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.ProveedoresContactos" Width="1.5" PointX="9.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.RolesUsuarios" Width="1.5" PointX="8.25" PointY="21.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.TiposProveedores" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.TiposUbicaciones" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.TiposUsuarios" Width="1.5" PointX="8.25" PointY="24.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.Ubicaciones" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatosHECSAModel.Usuarios" Width="1.5" PointX="10.5" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="DatosHECSAModel.FK_CorreoNotificacion_Empresas1" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_DatosFiscales_Empresas1" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_DatosFiscales_Ubicaciones" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_Empresas_Ubicaciones" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_Productos_Empresas1" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_Proveedores_Empresas1" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_Empresas1" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_Generos" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_InventariosProductos_Productos" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_Ubicaciones_MexCP" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_Proveedores_TiposProveedores" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_Proveedores_Ubicaciones" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_ProveedoresContactos_Proveedores" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_RolesUsuarios" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_Ubicaciones_TiposUbicaciones" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_TiposUsuarios" ManuallyRouted="false" />
-        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_Ubicaciones" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DatosHECSAModel.CorreoNotificacion" Width="1.5" PointX="7.5" PointY="24" />
+        <EntityTypeShape EntityType="DatosHECSAModel.DatosFiscales" Width="1.5" PointX="7.5" PointY="13" />
+        <EntityTypeShape EntityType="DatosHECSAModel.Empresas" Width="1.5" PointX="5.25" PointY="14.75" />
+        <EntityTypeShape EntityType="DatosHECSAModel.Generos" Width="1.5" PointX="8.25" PointY="20.375" />
+        <EntityTypeShape EntityType="DatosHECSAModel.InventariosProductos" Width="1.5" PointX="9.75" PointY="28.125" />
+        <EntityTypeShape EntityType="DatosHECSAModel.MexCP" Width="1.5" PointX="0.75" PointY="10.625" />
+        <EntityTypeShape EntityType="DatosHECSAModel.Productos" Width="1.5" PointX="7.5" PointY="27.875" />
+        <EntityTypeShape EntityType="DatosHECSAModel.Proveedores" Width="1.5" PointX="7.5" PointY="7.875" />
+        <EntityTypeShape EntityType="DatosHECSAModel.ProveedoresContactos" Width="1.5" PointX="9.75" PointY="6.875" />
+        <EntityTypeShape EntityType="DatosHECSAModel.RolesUsuarios" Width="1.5" PointX="8.25" PointY="17.625" />
+        <EntityTypeShape EntityType="DatosHECSAModel.TiposProveedores" Width="1.5" PointX="5.25" PointY="8.875" />
+        <EntityTypeShape EntityType="DatosHECSAModel.TiposUbicaciones" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DatosHECSAModel.TiposUsuarios" Width="1.5" PointX="8.25" PointY="3.875" />
+        <EntityTypeShape EntityType="DatosHECSAModel.Ubicaciones" Width="1.5" PointX="3" PointY="10.875" />
+        <EntityTypeShape EntityType="DatosHECSAModel.Usuarios" Width="1.5" PointX="10.5" PointY="11.75" />
+        <AssociationConnector Association="DatosHECSAModel.FK_CorreoNotificacion_Empresas1" />
+        <AssociationConnector Association="DatosHECSAModel.FK_DatosFiscales_Empresas1" />
+        <AssociationConnector Association="DatosHECSAModel.FK_DatosFiscales_Ubicaciones" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Empresas_Ubicaciones" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Productos_Empresas1" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Proveedores_Empresas1" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_Empresas1" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_Generos" />
+        <AssociationConnector Association="DatosHECSAModel.FK_InventariosProductos_Productos" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Ubicaciones_MexCP" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Proveedores_TiposProveedores" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Proveedores_Ubicaciones" />
+        <AssociationConnector Association="DatosHECSAModel.FK_ProveedoresContactos_Proveedores" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_RolesUsuarios" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Ubicaciones_TiposUbicaciones" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_TiposUsuarios" />
+        <AssociationConnector Association="DatosHECSAModel.FK_Usuarios_Ubicaciones" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

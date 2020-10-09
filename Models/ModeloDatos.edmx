@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DatosHECSAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DatosHECSAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CorreoNotificacion">
           <Key>
             <PropertyRef Name="CorreoNotificacionID" />
@@ -18,7 +18,7 @@
           <Property Name="Puerto" Type="int" Nullable="false" />
           <Property Name="EstatusRegistroID" Type="int" Nullable="false" />
           <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
-          <Property Name="EmpresaID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EmpresaID" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="DatosFiscales">
           <Key>
@@ -40,8 +40,8 @@
           </Key>
           <Property Name="EmpresaID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="NombreEmpresa" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="CorreoElectronico" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="Telefono" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="150" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
           <Property Name="UbicacionID" Type="uniqueidentifier" />
           <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
           <Property Name="EstatusRegistroID" Type="int" Nullable="false" />
@@ -204,7 +204,7 @@
           <Property Name="EmpresaID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <Association Name="FK_CorreoNotificacion_Empresas1">
-          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
           <End Role="CorreoNotificacion" Type="Self.CorreoNotificacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empresas">
@@ -494,26 +494,110 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DatosHECSAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DatosHECSAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CorreoNotificacion" EntityType="DatosHECSAModel.CorreoNotificacion" />
+          <EntitySet Name="DatosFiscales" EntityType="DatosHECSAModel.DatosFiscales" />
+          <EntitySet Name="Empresas" EntityType="DatosHECSAModel.Empresas" />
+          <EntitySet Name="Generos" EntityType="DatosHECSAModel.Generos" />
+          <EntitySet Name="InventariosProductos" EntityType="DatosHECSAModel.InventariosProductos" />
+          <EntitySet Name="MexCP" EntityType="DatosHECSAModel.MexCP" />
+          <EntitySet Name="Productos" EntityType="DatosHECSAModel.Productos" />
+          <EntitySet Name="Proveedores" EntityType="DatosHECSAModel.Proveedores" />
+          <EntitySet Name="ProveedoresContactos" EntityType="DatosHECSAModel.ProveedoresContactos" />
+          <EntitySet Name="RolesUsuarios" EntityType="DatosHECSAModel.RolesUsuarios" />
+          <EntitySet Name="TiposProveedores" EntityType="DatosHECSAModel.TiposProveedores" />
+          <EntitySet Name="TiposUbicaciones" EntityType="DatosHECSAModel.TiposUbicaciones" />
+          <EntitySet Name="TiposUsuarios" EntityType="DatosHECSAModel.TiposUsuarios" />
+          <EntitySet Name="Ubicaciones" EntityType="DatosHECSAModel.Ubicaciones" />
+          <EntitySet Name="Usuarios" EntityType="DatosHECSAModel.Usuarios" />
+          <AssociationSet Name="FK_CorreoNotificacion_Empresas1" Association="DatosHECSAModel.FK_CorreoNotificacion_Empresas1">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="CorreoNotificacion" EntitySet="CorreoNotificacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DatosFiscales_Empresas1" Association="DatosHECSAModel.FK_DatosFiscales_Empresas1">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="DatosFiscales" EntitySet="DatosFiscales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DatosFiscales_Ubicaciones" Association="DatosHECSAModel.FK_DatosFiscales_Ubicaciones">
+            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
+            <End Role="DatosFiscales" EntitySet="DatosFiscales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresas_Ubicaciones" Association="DatosHECSAModel.FK_Empresas_Ubicaciones">
+            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
+            <End Role="Empresas" EntitySet="Empresas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Productos_Empresas1" Association="DatosHECSAModel.FK_Productos_Empresas1">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_Empresas1" Association="DatosHECSAModel.FK_Proveedores_Empresas1">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Empresas1" Association="DatosHECSAModel.FK_Usuarios_Empresas1">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Generos" Association="DatosHECSAModel.FK_Usuarios_Generos">
+            <End Role="Generos" EntitySet="Generos" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventariosProductos_Productos" Association="DatosHECSAModel.FK_InventariosProductos_Productos">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="InventariosProductos" EntitySet="InventariosProductos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ubicaciones_MexCP" Association="DatosHECSAModel.FK_Ubicaciones_MexCP">
+            <End Role="MexCP" EntitySet="MexCP" />
+            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_TiposProveedores" Association="DatosHECSAModel.FK_Proveedores_TiposProveedores">
+            <End Role="TiposProveedores" EntitySet="TiposProveedores" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_Ubicaciones" Association="DatosHECSAModel.FK_Proveedores_Ubicaciones">
+            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresContactos_Proveedores" Association="DatosHECSAModel.FK_ProveedoresContactos_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="ProveedoresContactos" EntitySet="ProveedoresContactos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_RolesUsuarios" Association="DatosHECSAModel.FK_Usuarios_RolesUsuarios">
+            <End Role="RolesUsuarios" EntitySet="RolesUsuarios" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ubicaciones_TiposUbicaciones" Association="DatosHECSAModel.FK_Ubicaciones_TiposUbicaciones">
+            <End Role="TiposUbicaciones" EntitySet="TiposUbicaciones" />
+            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_TiposUsuarios" Association="DatosHECSAModel.FK_Usuarios_TiposUsuarios">
+            <End Role="TiposUsuarios" EntitySet="TiposUsuarios" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Ubicaciones" Association="DatosHECSAModel.FK_Usuarios_Ubicaciones">
+            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="CorreoNotificacion">
           <Key>
             <PropertyRef Name="CorreoNotificacionID" />
           </Key>
           <Property Name="CorreoNotificacionID" Type="Guid" Nullable="false" />
-          <Property Name="CorreoElectronico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Asunto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SMTP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Asunto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SMTP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Puerto" Type="Int32" Nullable="false" />
           <Property Name="EstatusRegistroID" Type="Int32" Nullable="false" />
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EmpresaID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Empresas" Relationship="Self.FK_CorreoNotificacion_Empresas1" FromRole="CorreoNotificacion" ToRole="Empresas" />
+          <Property Name="EmpresaID" Type="Guid" />
+          <NavigationProperty Name="Empresas" Relationship="DatosHECSAModel.FK_CorreoNotificacion_Empresas1" FromRole="CorreoNotificacion" ToRole="Empresas" />
         </EntityType>
         <EntityType Name="DatosFiscales">
           <Key>
@@ -522,32 +606,32 @@
           <Property Name="DatoFiscalID" Type="Guid" Nullable="false" />
           <Property Name="RFC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RazonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CorreoElectronico" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CorreoElectronico" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UbicacionID" Type="Guid" />
           <Property Name="EstatusRegistroID" Type="Int32" Nullable="false" />
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EmpresaID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Empresas" Relationship="Self.FK_DatosFiscales_Empresas1" FromRole="DatosFiscales" ToRole="Empresas" />
-          <NavigationProperty Name="Ubicaciones" Relationship="Self.FK_DatosFiscales_Ubicaciones" FromRole="DatosFiscales" ToRole="Ubicaciones" />
+          <NavigationProperty Name="Empresas" Relationship="DatosHECSAModel.FK_DatosFiscales_Empresas1" FromRole="DatosFiscales" ToRole="Empresas" />
+          <NavigationProperty Name="Ubicaciones" Relationship="DatosHECSAModel.FK_DatosFiscales_Ubicaciones" FromRole="DatosFiscales" ToRole="Ubicaciones" />
         </EntityType>
         <EntityType Name="Empresas">
           <Key>
             <PropertyRef Name="EmpresaID" />
           </Key>
           <Property Name="EmpresaID" Type="Guid" Nullable="false" />
-          <Property Name="NombreEmpresa" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CorreoElectronico" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreEmpresa" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UbicacionID" Type="Guid" />
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EstatusRegistroID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CorreoNotificacion" Relationship="Self.FK_CorreoNotificacion_Empresas1" FromRole="Empresas" ToRole="CorreoNotificacion" />
-          <NavigationProperty Name="DatosFiscales" Relationship="Self.FK_DatosFiscales_Empresas1" FromRole="Empresas" ToRole="DatosFiscales" />
-          <NavigationProperty Name="Ubicaciones" Relationship="Self.FK_Empresas_Ubicaciones" FromRole="Empresas" ToRole="Ubicaciones" />
-          <NavigationProperty Name="Productos" Relationship="Self.FK_Productos_Empresas1" FromRole="Empresas" ToRole="Productos" />
-          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_Empresas1" FromRole="Empresas" ToRole="Proveedores" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Empresas1" FromRole="Empresas" ToRole="Usuarios" />
+          <NavigationProperty Name="CorreoNotificacion" Relationship="DatosHECSAModel.FK_CorreoNotificacion_Empresas1" FromRole="Empresas" ToRole="CorreoNotificacion" />
+          <NavigationProperty Name="DatosFiscales" Relationship="DatosHECSAModel.FK_DatosFiscales_Empresas1" FromRole="Empresas" ToRole="DatosFiscales" />
+          <NavigationProperty Name="Ubicaciones" Relationship="DatosHECSAModel.FK_Empresas_Ubicaciones" FromRole="Empresas" ToRole="Ubicaciones" />
+          <NavigationProperty Name="Productos" Relationship="DatosHECSAModel.FK_Productos_Empresas1" FromRole="Empresas" ToRole="Productos" />
+          <NavigationProperty Name="Proveedores" Relationship="DatosHECSAModel.FK_Proveedores_Empresas1" FromRole="Empresas" ToRole="Proveedores" />
+          <NavigationProperty Name="Usuarios" Relationship="DatosHECSAModel.FK_Usuarios_Empresas1" FromRole="Empresas" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Generos">
           <Key>
@@ -557,7 +641,7 @@
           <Property Name="Genero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EstatusRegistroID" Type="Int32" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Generos" FromRole="Generos" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios" Relationship="DatosHECSAModel.FK_Usuarios_Generos" FromRole="Generos" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="InventariosProductos">
           <Key>
@@ -570,14 +654,14 @@
           <Property Name="Stock" Type="Int32" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="0" />
           <Property Name="ProductoID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Productos" Relationship="Self.FK_InventariosProductos_Productos" FromRole="InventariosProductos" ToRole="Productos" />
+          <NavigationProperty Name="Productos" Relationship="DatosHECSAModel.FK_InventariosProductos_Productos" FromRole="InventariosProductos" ToRole="Productos" />
         </EntityType>
         <EntityType Name="MexCP">
           <Key>
             <PropertyRef Name="d_codigo" />
             <PropertyRef Name="id_asenta_cpcons" />
           </Key>
-          <Property Name="d_codigo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="d_codigo" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="d_asenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="d_tipo_asenta" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="D_mnpio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -589,25 +673,25 @@
           <Property Name="c_CP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="c_tipo_asenta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="c_mnpio" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="id_asenta_cpcons" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_asenta_cpcons" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="d_zona" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="c_cve_ciudad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Ubicaciones" Relationship="Self.FK_Ubicaciones_MexCP" FromRole="MexCP" ToRole="Ubicaciones" />
+          <NavigationProperty Name="Ubicaciones" Relationship="DatosHECSAModel.FK_Ubicaciones_MexCP" FromRole="MexCP" ToRole="Ubicaciones" />
         </EntityType>
         <EntityType Name="Productos">
           <Key>
             <PropertyRef Name="ProductoID" />
           </Key>
           <Property Name="ProductoID" Type="Guid" Nullable="false" />
-          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="450" FixedLength="false" Unicode="false" />
           <Property Name="MarcaID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="CategoriaID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="UnidadMedida" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="EmpresaID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Empresas" Relationship="Self.FK_Productos_Empresas1" FromRole="Productos" ToRole="Empresas" />
-          <NavigationProperty Name="InventariosProductos" Relationship="Self.FK_InventariosProductos_Productos" FromRole="Productos" ToRole="InventariosProductos" />
+          <NavigationProperty Name="Empresas" Relationship="DatosHECSAModel.FK_Productos_Empresas1" FromRole="Productos" ToRole="Empresas" />
+          <NavigationProperty Name="InventariosProductos" Relationship="DatosHECSAModel.FK_InventariosProductos_Productos" FromRole="Productos" ToRole="InventariosProductos" />
         </EntityType>
         <EntityType Name="Proveedores">
           <Key>
@@ -615,27 +699,27 @@
           </Key>
           <Property Name="ProveedoresID" Type="Guid" Nullable="false" />
           <Property Name="TipoProveedorID" Type="Int32" />
-          <Property Name="NombresRS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CorreoElectronico" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombresRS" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoElectronico" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UbicacionID" Type="Guid" />
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EstatusRegistroID" Type="Int32" Nullable="false" />
           <Property Name="EmpresaID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Empresas" Relationship="Self.FK_Proveedores_Empresas1" FromRole="Proveedores" ToRole="Empresas" />
-          <NavigationProperty Name="TiposProveedores" Relationship="Self.FK_Proveedores_TiposProveedores" FromRole="Proveedores" ToRole="TiposProveedores" />
-          <NavigationProperty Name="Ubicaciones" Relationship="Self.FK_Proveedores_Ubicaciones" FromRole="Proveedores" ToRole="Ubicaciones" />
-          <NavigationProperty Name="ProveedoresContactos" Relationship="Self.FK_ProveedoresContactos_Proveedores" FromRole="Proveedores" ToRole="ProveedoresContactos" />
+          <NavigationProperty Name="Empresas" Relationship="DatosHECSAModel.FK_Proveedores_Empresas1" FromRole="Proveedores" ToRole="Empresas" />
+          <NavigationProperty Name="TiposProveedores" Relationship="DatosHECSAModel.FK_Proveedores_TiposProveedores" FromRole="Proveedores" ToRole="TiposProveedores" />
+          <NavigationProperty Name="Ubicaciones" Relationship="DatosHECSAModel.FK_Proveedores_Ubicaciones" FromRole="Proveedores" ToRole="Ubicaciones" />
+          <NavigationProperty Name="ProveedoresContactos" Relationship="DatosHECSAModel.FK_ProveedoresContactos_Proveedores" FromRole="Proveedores" ToRole="ProveedoresContactos" />
         </EntityType>
         <EntityType Name="ProveedoresContactos">
           <Key>
             <PropertyRef Name="ProveedorContactoID" />
           </Key>
           <Property Name="ProveedorContactoID" Type="Guid" Nullable="false" />
-          <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CorreoPersonal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoPersonal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CorreInstitucional" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TelefonoContacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -643,17 +727,17 @@
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EstatusRegistroID" Type="Int32" Nullable="false" />
           <Property Name="ProveedoresID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Proveedores" Relationship="Self.FK_ProveedoresContactos_Proveedores" FromRole="ProveedoresContactos" ToRole="Proveedores" />
+          <NavigationProperty Name="Proveedores" Relationship="DatosHECSAModel.FK_ProveedoresContactos_Proveedores" FromRole="ProveedoresContactos" ToRole="Proveedores" />
         </EntityType>
         <EntityType Name="RolesUsuarios">
           <Key>
             <PropertyRef Name="RolUsuarioID" />
           </Key>
           <Property Name="RolUsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="RolUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RolUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EstatusRegistroID" Type="Int32" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_RolesUsuarios" FromRole="RolesUsuarios" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios" Relationship="DatosHECSAModel.FK_Usuarios_RolesUsuarios" FromRole="RolesUsuarios" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="TiposProveedores">
           <Key>
@@ -661,7 +745,7 @@
           </Key>
           <Property Name="TipoProveedorID" Type="Int32" Nullable="false" />
           <Property Name="Proveedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_TiposProveedores" FromRole="TiposProveedores" ToRole="Proveedores" />
+          <NavigationProperty Name="Proveedores" Relationship="DatosHECSAModel.FK_Proveedores_TiposProveedores" FromRole="TiposProveedores" ToRole="Proveedores" />
         </EntityType>
         <EntityType Name="TiposUbicaciones">
           <Key>
@@ -671,17 +755,17 @@
           <Property Name="TipoUbicacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EstatusRegistroID" Type="Int32" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Ubicaciones" Relationship="Self.FK_Ubicaciones_TiposUbicaciones" FromRole="TiposUbicaciones" ToRole="Ubicaciones" />
+          <NavigationProperty Name="Ubicaciones" Relationship="DatosHECSAModel.FK_Ubicaciones_TiposUbicaciones" FromRole="TiposUbicaciones" ToRole="Ubicaciones" />
         </EntityType>
         <EntityType Name="TiposUsuarios">
           <Key>
             <PropertyRef Name="TipoUsuarioID" />
           </Key>
           <Property Name="TipoUsuarioID" Type="Int32" Nullable="false" />
-          <Property Name="TipoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EstatusRegistroID" Type="Int32" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_TiposUsuarios" FromRole="TiposUsuarios" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios" Relationship="DatosHECSAModel.FK_Usuarios_TiposUsuarios" FromRole="TiposUsuarios" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Ubicaciones">
           <Key>
@@ -694,12 +778,12 @@
           <Property Name="ColoniaID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="EstatusRegistroID" Type="Int32" Nullable="false" />
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DatosFiscales" Relationship="Self.FK_DatosFiscales_Ubicaciones" FromRole="Ubicaciones" ToRole="DatosFiscales" />
-          <NavigationProperty Name="Empresas" Relationship="Self.FK_Empresas_Ubicaciones" FromRole="Ubicaciones" ToRole="Empresas" />
-          <NavigationProperty Name="MexCP" Relationship="Self.FK_Ubicaciones_MexCP" FromRole="Ubicaciones" ToRole="MexCP" />
-          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_Ubicaciones" FromRole="Ubicaciones" ToRole="Proveedores" />
-          <NavigationProperty Name="TiposUbicaciones" Relationship="Self.FK_Ubicaciones_TiposUbicaciones" FromRole="Ubicaciones" ToRole="TiposUbicaciones" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Ubicaciones" FromRole="Ubicaciones" ToRole="Usuarios" />
+          <NavigationProperty Name="DatosFiscales" Relationship="DatosHECSAModel.FK_DatosFiscales_Ubicaciones" FromRole="Ubicaciones" ToRole="DatosFiscales" />
+          <NavigationProperty Name="Empresas" Relationship="DatosHECSAModel.FK_Empresas_Ubicaciones" FromRole="Ubicaciones" ToRole="Empresas" />
+          <NavigationProperty Name="MexCP" Relationship="DatosHECSAModel.FK_Ubicaciones_MexCP" FromRole="Ubicaciones" ToRole="MexCP" />
+          <NavigationProperty Name="Proveedores" Relationship="DatosHECSAModel.FK_Proveedores_Ubicaciones" FromRole="Ubicaciones" ToRole="Proveedores" />
+          <NavigationProperty Name="TiposUbicaciones" Relationship="DatosHECSAModel.FK_Ubicaciones_TiposUbicaciones" FromRole="Ubicaciones" ToRole="TiposUbicaciones" />
+          <NavigationProperty Name="Usuarios" Relationship="DatosHECSAModel.FK_Usuarios_Ubicaciones" FromRole="Ubicaciones" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -710,13 +794,13 @@
           <Property Name="TipoUsuarioID" Type="Int32" Nullable="false" />
           <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
           <Property Name="GeneroID" Type="Int32" />
-          <Property Name="Nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CodigoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CorreoPersonal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoPersonal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CorreInstitucional" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TelefonoContacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -725,15 +809,15 @@
           <Property Name="EstatusRegistroID" Type="Int32" Nullable="false" />
           <Property Name="Token" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="EmpresaID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Empresas" Relationship="Self.FK_Usuarios_Empresas1" FromRole="Usuarios" ToRole="Empresas" />
-          <NavigationProperty Name="Generos" Relationship="Self.FK_Usuarios_Generos" FromRole="Usuarios" ToRole="Generos" />
-          <NavigationProperty Name="RolesUsuarios" Relationship="Self.FK_Usuarios_RolesUsuarios" FromRole="Usuarios" ToRole="RolesUsuarios" />
-          <NavigationProperty Name="TiposUsuarios" Relationship="Self.FK_Usuarios_TiposUsuarios" FromRole="Usuarios" ToRole="TiposUsuarios" />
-          <NavigationProperty Name="Ubicaciones" Relationship="Self.FK_Usuarios_Ubicaciones" FromRole="Usuarios" ToRole="Ubicaciones" />
+          <NavigationProperty Name="Empresas" Relationship="DatosHECSAModel.FK_Usuarios_Empresas1" FromRole="Usuarios" ToRole="Empresas" />
+          <NavigationProperty Name="Generos" Relationship="DatosHECSAModel.FK_Usuarios_Generos" FromRole="Usuarios" ToRole="Generos" />
+          <NavigationProperty Name="RolesUsuarios" Relationship="DatosHECSAModel.FK_Usuarios_RolesUsuarios" FromRole="Usuarios" ToRole="RolesUsuarios" />
+          <NavigationProperty Name="TiposUsuarios" Relationship="DatosHECSAModel.FK_Usuarios_TiposUsuarios" FromRole="Usuarios" ToRole="TiposUsuarios" />
+          <NavigationProperty Name="Ubicaciones" Relationship="DatosHECSAModel.FK_Usuarios_Ubicaciones" FromRole="Usuarios" ToRole="Ubicaciones" />
         </EntityType>
         <Association Name="FK_CorreoNotificacion_Empresas1">
-          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
-          <End Role="CorreoNotificacion" Type="Self.CorreoNotificacion" Multiplicity="*" />
+          <End Type="DatosHECSAModel.Empresas" Role="Empresas" Multiplicity="0..1" />
+          <End Type="DatosHECSAModel.CorreoNotificacion" Role="CorreoNotificacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empresas">
               <PropertyRef Name="EmpresaID" />
@@ -744,8 +828,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DatosFiscales_Empresas1">
-          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
-          <End Role="DatosFiscales" Type="Self.DatosFiscales" Multiplicity="*" />
+          <End Type="DatosHECSAModel.Empresas" Role="Empresas" Multiplicity="1" />
+          <End Type="DatosHECSAModel.DatosFiscales" Role="DatosFiscales" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empresas">
               <PropertyRef Name="EmpresaID" />
@@ -756,8 +840,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DatosFiscales_Ubicaciones">
-          <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
-          <End Role="DatosFiscales" Type="Self.DatosFiscales" Multiplicity="*" />
+          <End Type="DatosHECSAModel.Ubicaciones" Role="Ubicaciones" Multiplicity="0..1" />
+          <End Type="DatosHECSAModel.DatosFiscales" Role="DatosFiscales" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ubicaciones">
               <PropertyRef Name="UbicacionID" />
@@ -768,8 +852,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Empresas_Ubicaciones">
-          <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
-          <End Role="Empresas" Type="Self.Empresas" Multiplicity="*" />
+          <End Type="DatosHECSAModel.Ubicaciones" Role="Ubicaciones" Multiplicity="0..1" />
+          <End Type="DatosHECSAModel.Empresas" Role="Empresas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ubicaciones">
               <PropertyRef Name="UbicacionID" />
@@ -780,8 +864,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Productos_Empresas1">
-          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
-          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <End Type="DatosHECSAModel.Empresas" Role="Empresas" Multiplicity="1" />
+          <End Type="DatosHECSAModel.Productos" Role="Productos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empresas">
               <PropertyRef Name="EmpresaID" />
@@ -792,8 +876,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedores_Empresas1">
-          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
-          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <End Type="DatosHECSAModel.Empresas" Role="Empresas" Multiplicity="1" />
+          <End Type="DatosHECSAModel.Proveedores" Role="Proveedores" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empresas">
               <PropertyRef Name="EmpresaID" />
@@ -804,8 +888,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuarios_Empresas1">
-          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <End Type="DatosHECSAModel.Empresas" Role="Empresas" Multiplicity="1" />
+          <End Type="DatosHECSAModel.Usuarios" Role="Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empresas">
               <PropertyRef Name="EmpresaID" />
@@ -816,8 +900,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuarios_Generos">
-          <End Role="Generos" Type="Self.Generos" Multiplicity="0..1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <End Type="DatosHECSAModel.Generos" Role="Generos" Multiplicity="0..1" />
+          <End Type="DatosHECSAModel.Usuarios" Role="Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Generos">
               <PropertyRef Name="GeneroID" />
@@ -828,8 +912,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_InventariosProductos_Productos">
-          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
-          <End Role="InventariosProductos" Type="Self.InventariosProductos" Multiplicity="*" />
+          <End Type="DatosHECSAModel.Productos" Role="Productos" Multiplicity="1" />
+          <End Type="DatosHECSAModel.InventariosProductos" Role="InventariosProductos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Productos">
               <PropertyRef Name="ProductoID" />
@@ -840,8 +924,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ubicaciones_MexCP">
-          <End Role="MexCP" Type="Self.MexCP" Multiplicity="0..1" />
-          <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="*" />
+          <End Type="DatosHECSAModel.MexCP" Role="MexCP" Multiplicity="0..1" />
+          <End Type="DatosHECSAModel.Ubicaciones" Role="Ubicaciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MexCP">
               <PropertyRef Name="d_codigo" />
@@ -854,8 +938,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedores_TiposProveedores">
-          <End Role="TiposProveedores" Type="Self.TiposProveedores" Multiplicity="0..1" />
-          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <End Type="DatosHECSAModel.TiposProveedores" Role="TiposProveedores" Multiplicity="0..1" />
+          <End Type="DatosHECSAModel.Proveedores" Role="Proveedores" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TiposProveedores">
               <PropertyRef Name="TipoProveedorID" />
@@ -866,8 +950,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedores_Ubicaciones">
-          <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
-          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <End Type="DatosHECSAModel.Ubicaciones" Role="Ubicaciones" Multiplicity="0..1" />
+          <End Type="DatosHECSAModel.Proveedores" Role="Proveedores" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ubicaciones">
               <PropertyRef Name="UbicacionID" />
@@ -878,8 +962,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProveedoresContactos_Proveedores">
-          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
-          <End Role="ProveedoresContactos" Type="Self.ProveedoresContactos" Multiplicity="*" />
+          <End Type="DatosHECSAModel.Proveedores" Role="Proveedores" Multiplicity="1" />
+          <End Type="DatosHECSAModel.ProveedoresContactos" Role="ProveedoresContactos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedores">
               <PropertyRef Name="ProveedoresID" />
@@ -890,8 +974,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuarios_RolesUsuarios">
-          <End Role="RolesUsuarios" Type="Self.RolesUsuarios" Multiplicity="1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <End Type="DatosHECSAModel.RolesUsuarios" Role="RolesUsuarios" Multiplicity="1" />
+          <End Type="DatosHECSAModel.Usuarios" Role="Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RolesUsuarios">
               <PropertyRef Name="RolUsuarioID" />
@@ -902,8 +986,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Ubicaciones_TiposUbicaciones">
-          <End Role="TiposUbicaciones" Type="Self.TiposUbicaciones" Multiplicity="0..1" />
-          <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="*" />
+          <End Type="DatosHECSAModel.TiposUbicaciones" Role="TiposUbicaciones" Multiplicity="0..1" />
+          <End Type="DatosHECSAModel.Ubicaciones" Role="Ubicaciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TiposUbicaciones">
               <PropertyRef Name="TipoUbicacionID" />
@@ -914,8 +998,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuarios_TiposUsuarios">
-          <End Role="TiposUsuarios" Type="Self.TiposUsuarios" Multiplicity="1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <End Type="DatosHECSAModel.TiposUsuarios" Role="TiposUsuarios" Multiplicity="1" />
+          <End Type="DatosHECSAModel.Usuarios" Role="Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TiposUsuarios">
               <PropertyRef Name="TipoUsuarioID" />
@@ -926,8 +1010,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuarios_Ubicaciones">
-          <End Role="Ubicaciones" Type="Self.Ubicaciones" Multiplicity="0..1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <End Type="DatosHECSAModel.Ubicaciones" Role="Ubicaciones" Multiplicity="0..1" />
+          <End Type="DatosHECSAModel.Usuarios" Role="Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ubicaciones">
               <PropertyRef Name="UbicacionID" />
@@ -937,92 +1021,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DatosHECSAEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CorreoNotificacion" EntityType="Self.CorreoNotificacion" />
-          <EntitySet Name="DatosFiscales" EntityType="Self.DatosFiscales" />
-          <EntitySet Name="Empresas" EntityType="Self.Empresas" />
-          <EntitySet Name="Generos" EntityType="Self.Generos" />
-          <EntitySet Name="InventariosProductos" EntityType="Self.InventariosProductos" />
-          <EntitySet Name="MexCP" EntityType="Self.MexCP" />
-          <EntitySet Name="Productos" EntityType="Self.Productos" />
-          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
-          <EntitySet Name="ProveedoresContactos" EntityType="Self.ProveedoresContactos" />
-          <EntitySet Name="RolesUsuarios" EntityType="Self.RolesUsuarios" />
-          <EntitySet Name="TiposProveedores" EntityType="Self.TiposProveedores" />
-          <EntitySet Name="TiposUbicaciones" EntityType="Self.TiposUbicaciones" />
-          <EntitySet Name="TiposUsuarios" EntityType="Self.TiposUsuarios" />
-          <EntitySet Name="Ubicaciones" EntityType="Self.Ubicaciones" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
-          <AssociationSet Name="FK_CorreoNotificacion_Empresas1" Association="Self.FK_CorreoNotificacion_Empresas1">
-            <End Role="Empresas" EntitySet="Empresas" />
-            <End Role="CorreoNotificacion" EntitySet="CorreoNotificacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DatosFiscales_Empresas1" Association="Self.FK_DatosFiscales_Empresas1">
-            <End Role="Empresas" EntitySet="Empresas" />
-            <End Role="DatosFiscales" EntitySet="DatosFiscales" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DatosFiscales_Ubicaciones" Association="Self.FK_DatosFiscales_Ubicaciones">
-            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
-            <End Role="DatosFiscales" EntitySet="DatosFiscales" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empresas_Ubicaciones" Association="Self.FK_Empresas_Ubicaciones">
-            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
-            <End Role="Empresas" EntitySet="Empresas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Productos_Empresas1" Association="Self.FK_Productos_Empresas1">
-            <End Role="Empresas" EntitySet="Empresas" />
-            <End Role="Productos" EntitySet="Productos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedores_Empresas1" Association="Self.FK_Proveedores_Empresas1">
-            <End Role="Empresas" EntitySet="Empresas" />
-            <End Role="Proveedores" EntitySet="Proveedores" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuarios_Empresas1" Association="Self.FK_Usuarios_Empresas1">
-            <End Role="Empresas" EntitySet="Empresas" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuarios_Generos" Association="Self.FK_Usuarios_Generos">
-            <End Role="Generos" EntitySet="Generos" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InventariosProductos_Productos" Association="Self.FK_InventariosProductos_Productos">
-            <End Role="Productos" EntitySet="Productos" />
-            <End Role="InventariosProductos" EntitySet="InventariosProductos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ubicaciones_MexCP" Association="Self.FK_Ubicaciones_MexCP">
-            <End Role="MexCP" EntitySet="MexCP" />
-            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedores_TiposProveedores" Association="Self.FK_Proveedores_TiposProveedores">
-            <End Role="TiposProveedores" EntitySet="TiposProveedores" />
-            <End Role="Proveedores" EntitySet="Proveedores" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedores_Ubicaciones" Association="Self.FK_Proveedores_Ubicaciones">
-            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
-            <End Role="Proveedores" EntitySet="Proveedores" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProveedoresContactos_Proveedores" Association="Self.FK_ProveedoresContactos_Proveedores">
-            <End Role="Proveedores" EntitySet="Proveedores" />
-            <End Role="ProveedoresContactos" EntitySet="ProveedoresContactos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuarios_RolesUsuarios" Association="Self.FK_Usuarios_RolesUsuarios">
-            <End Role="RolesUsuarios" EntitySet="RolesUsuarios" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Ubicaciones_TiposUbicaciones" Association="Self.FK_Ubicaciones_TiposUbicaciones">
-            <End Role="TiposUbicaciones" EntitySet="TiposUbicaciones" />
-            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuarios_TiposUsuarios" Association="Self.FK_Usuarios_TiposUsuarios">
-            <End Role="TiposUsuarios" EntitySet="TiposUsuarios" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuarios_Ubicaciones" Association="Self.FK_Usuarios_Ubicaciones">
-            <End Role="Ubicaciones" EntitySet="Ubicaciones" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1031,212 +1030,212 @@
           <EntitySetMapping Name="CorreoNotificacion">
             <EntityTypeMapping TypeName="DatosHECSAModel.CorreoNotificacion">
               <MappingFragment StoreEntitySet="CorreoNotificacion">
-                <ScalarProperty Name="CorreoNotificacionID" ColumnName="CorreoNotificacionID" />
-                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="Clave" ColumnName="Clave" />
-                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
-                <ScalarProperty Name="SMTP" ColumnName="SMTP" />
-                <ScalarProperty Name="Puerto" ColumnName="Puerto" />
-                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
                 <ScalarProperty Name="EmpresaID" ColumnName="EmpresaID" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="Puerto" ColumnName="Puerto" />
+                <ScalarProperty Name="SMTP" ColumnName="SMTP" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="CorreoNotificacionID" ColumnName="CorreoNotificacionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DatosFiscales">
             <EntityTypeMapping TypeName="DatosHECSAModel.DatosFiscales">
               <MappingFragment StoreEntitySet="DatosFiscales">
-                <ScalarProperty Name="DatoFiscalID" ColumnName="DatoFiscalID" />
-                <ScalarProperty Name="RFC" ColumnName="RFC" />
-                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
-                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="UbicacionID" ColumnName="UbicacionID" />
-                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
                 <ScalarProperty Name="EmpresaID" ColumnName="EmpresaID" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="UbicacionID" ColumnName="UbicacionID" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="DatoFiscalID" ColumnName="DatoFiscalID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Empresas">
             <EntityTypeMapping TypeName="DatosHECSAModel.Empresas">
               <MappingFragment StoreEntitySet="Empresas">
-                <ScalarProperty Name="EmpresaID" ColumnName="EmpresaID" />
-                <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
-                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="UbicacionID" ColumnName="UbicacionID" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
                 <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UbicacionID" ColumnName="UbicacionID" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+                <ScalarProperty Name="EmpresaID" ColumnName="EmpresaID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Generos">
             <EntityTypeMapping TypeName="DatosHECSAModel.Generos">
               <MappingFragment StoreEntitySet="Generos">
-                <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
-                <ScalarProperty Name="Genero" ColumnName="Genero" />
-                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InventariosProductos">
             <EntityTypeMapping TypeName="DatosHECSAModel.InventariosProductos">
               <MappingFragment StoreEntitySet="InventariosProductos">
-                <ScalarProperty Name="InventarioProducto" ColumnName="InventarioProducto" />
-                <ScalarProperty Name="Costo" ColumnName="Costo" />
-                <ScalarProperty Name="Utilidad" ColumnName="Utilidad" />
-                <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
-                <ScalarProperty Name="Stock" ColumnName="Stock" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
                 <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="PrecioVenta" ColumnName="PrecioVenta" />
+                <ScalarProperty Name="Utilidad" ColumnName="Utilidad" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="InventarioProducto" ColumnName="InventarioProducto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MexCP">
             <EntityTypeMapping TypeName="DatosHECSAModel.MexCP">
               <MappingFragment StoreEntitySet="MexCP">
-                <ScalarProperty Name="d_codigo" ColumnName="d_codigo" />
-                <ScalarProperty Name="d_asenta" ColumnName="d_asenta" />
-                <ScalarProperty Name="d_tipo_asenta" ColumnName="d_tipo_asenta" />
-                <ScalarProperty Name="D_mnpio" ColumnName="D_mnpio" />
-                <ScalarProperty Name="d_estado" ColumnName="d_estado" />
-                <ScalarProperty Name="d_ciudad" ColumnName="d_ciudad" />
-                <ScalarProperty Name="d_CP" ColumnName="d_CP" />
-                <ScalarProperty Name="c_estado" ColumnName="c_estado" />
-                <ScalarProperty Name="c_oficina" ColumnName="c_oficina" />
-                <ScalarProperty Name="c_CP" ColumnName="c_CP" />
-                <ScalarProperty Name="c_tipo_asenta" ColumnName="c_tipo_asenta" />
-                <ScalarProperty Name="c_mnpio" ColumnName="c_mnpio" />
-                <ScalarProperty Name="id_asenta_cpcons" ColumnName="id_asenta_cpcons" />
-                <ScalarProperty Name="d_zona" ColumnName="d_zona" />
                 <ScalarProperty Name="c_cve_ciudad" ColumnName="c_cve_ciudad" />
+                <ScalarProperty Name="d_zona" ColumnName="d_zona" />
+                <ScalarProperty Name="id_asenta_cpcons" ColumnName="id_asenta_cpcons" />
+                <ScalarProperty Name="c_mnpio" ColumnName="c_mnpio" />
+                <ScalarProperty Name="c_tipo_asenta" ColumnName="c_tipo_asenta" />
+                <ScalarProperty Name="c_CP" ColumnName="c_CP" />
+                <ScalarProperty Name="c_oficina" ColumnName="c_oficina" />
+                <ScalarProperty Name="c_estado" ColumnName="c_estado" />
+                <ScalarProperty Name="d_CP" ColumnName="d_CP" />
+                <ScalarProperty Name="d_ciudad" ColumnName="d_ciudad" />
+                <ScalarProperty Name="d_estado" ColumnName="d_estado" />
+                <ScalarProperty Name="D_mnpio" ColumnName="D_mnpio" />
+                <ScalarProperty Name="d_tipo_asenta" ColumnName="d_tipo_asenta" />
+                <ScalarProperty Name="d_asenta" ColumnName="d_asenta" />
+                <ScalarProperty Name="d_codigo" ColumnName="d_codigo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Productos">
             <EntityTypeMapping TypeName="DatosHECSAModel.Productos">
               <MappingFragment StoreEntitySet="Productos">
-                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
-                <ScalarProperty Name="CategoriaID" ColumnName="CategoriaID" />
-                <ScalarProperty Name="UnidadMedida" ColumnName="UnidadMedida" />
                 <ScalarProperty Name="EmpresaID" ColumnName="EmpresaID" />
+                <ScalarProperty Name="UnidadMedida" ColumnName="UnidadMedida" />
+                <ScalarProperty Name="CategoriaID" ColumnName="CategoriaID" />
+                <ScalarProperty Name="MarcaID" ColumnName="MarcaID" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="ProductoID" ColumnName="ProductoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Proveedores">
             <EntityTypeMapping TypeName="DatosHECSAModel.Proveedores">
               <MappingFragment StoreEntitySet="Proveedores">
-                <ScalarProperty Name="ProveedoresID" ColumnName="ProveedoresID" />
-                <ScalarProperty Name="TipoProveedorID" ColumnName="TipoProveedorID" />
-                <ScalarProperty Name="NombresRS" ColumnName="NombresRS" />
-                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="UbicacionID" ColumnName="UbicacionID" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
                 <ScalarProperty Name="EmpresaID" ColumnName="EmpresaID" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UbicacionID" ColumnName="UbicacionID" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="NombresRS" ColumnName="NombresRS" />
+                <ScalarProperty Name="TipoProveedorID" ColumnName="TipoProveedorID" />
+                <ScalarProperty Name="ProveedoresID" ColumnName="ProveedoresID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProveedoresContactos">
             <EntityTypeMapping TypeName="DatosHECSAModel.ProveedoresContactos">
               <MappingFragment StoreEntitySet="ProveedoresContactos">
-                <ScalarProperty Name="ProveedorContactoID" ColumnName="ProveedorContactoID" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="CorreoPersonal" ColumnName="CorreoPersonal" />
-                <ScalarProperty Name="CorreInstitucional" ColumnName="CorreInstitucional" />
-                <ScalarProperty Name="TelefonoContacto" ColumnName="TelefonoContacto" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="UbicacionID" ColumnName="UbicacionID" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
                 <ScalarProperty Name="ProveedoresID" ColumnName="ProveedoresID" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UbicacionID" ColumnName="UbicacionID" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="TelefonoContacto" ColumnName="TelefonoContacto" />
+                <ScalarProperty Name="CorreInstitucional" ColumnName="CorreInstitucional" />
+                <ScalarProperty Name="CorreoPersonal" ColumnName="CorreoPersonal" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ProveedorContactoID" ColumnName="ProveedorContactoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RolesUsuarios">
             <EntityTypeMapping TypeName="DatosHECSAModel.RolesUsuarios">
               <MappingFragment StoreEntitySet="RolesUsuarios">
-                <ScalarProperty Name="RolUsuarioID" ColumnName="RolUsuarioID" />
-                <ScalarProperty Name="RolUsuario" ColumnName="RolUsuario" />
-                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="RolUsuario" ColumnName="RolUsuario" />
+                <ScalarProperty Name="RolUsuarioID" ColumnName="RolUsuarioID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TiposProveedores">
             <EntityTypeMapping TypeName="DatosHECSAModel.TiposProveedores">
               <MappingFragment StoreEntitySet="TiposProveedores">
-                <ScalarProperty Name="TipoProveedorID" ColumnName="TipoProveedorID" />
                 <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="TipoProveedorID" ColumnName="TipoProveedorID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TiposUbicaciones">
             <EntityTypeMapping TypeName="DatosHECSAModel.TiposUbicaciones">
               <MappingFragment StoreEntitySet="TiposUbicaciones">
-                <ScalarProperty Name="TipoUbicacionID" ColumnName="TipoUbicacionID" />
-                <ScalarProperty Name="TipoUbicacion" ColumnName="TipoUbicacion" />
-                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="TipoUbicacion" ColumnName="TipoUbicacion" />
+                <ScalarProperty Name="TipoUbicacionID" ColumnName="TipoUbicacionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TiposUsuarios">
             <EntityTypeMapping TypeName="DatosHECSAModel.TiposUsuarios">
               <MappingFragment StoreEntitySet="TiposUsuarios">
-                <ScalarProperty Name="TipoUsuarioID" ColumnName="TipoUsuarioID" />
-                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
-                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+                <ScalarProperty Name="TipoUsuarioID" ColumnName="TipoUsuarioID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ubicaciones">
             <EntityTypeMapping TypeName="DatosHECSAModel.Ubicaciones">
               <MappingFragment StoreEntitySet="Ubicaciones">
-                <ScalarProperty Name="UbicacionID" ColumnName="UbicacionID" />
-                <ScalarProperty Name="TipoUbicacionID" ColumnName="TipoUbicacionID" />
-                <ScalarProperty Name="CalleNumero" ColumnName="CalleNumero" />
-                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
-                <ScalarProperty Name="ColoniaID" ColumnName="ColoniaID" />
-                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="ColoniaID" ColumnName="ColoniaID" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="CalleNumero" ColumnName="CalleNumero" />
+                <ScalarProperty Name="TipoUbicacionID" ColumnName="TipoUbicacionID" />
+                <ScalarProperty Name="UbicacionID" ColumnName="UbicacionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="DatosHECSAModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
-                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
-                <ScalarProperty Name="RolUsuarioID" ColumnName="RolUsuarioID" />
-                <ScalarProperty Name="TipoUsuarioID" ColumnName="TipoUsuarioID" />
-                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
-                <ScalarProperty Name="Clave" ColumnName="Clave" />
-                <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
-                <ScalarProperty Name="CorreoPersonal" ColumnName="CorreoPersonal" />
-                <ScalarProperty Name="CorreInstitucional" ColumnName="CorreInstitucional" />
-                <ScalarProperty Name="TelefonoContacto" ColumnName="TelefonoContacto" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="UbicacionID" ColumnName="UbicacionID" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
-                <ScalarProperty Name="Token" ColumnName="Token" />
                 <ScalarProperty Name="EmpresaID" ColumnName="EmpresaID" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="EstatusRegistroID" ColumnName="EstatusRegistroID" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="UbicacionID" ColumnName="UbicacionID" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="TelefonoContacto" ColumnName="TelefonoContacto" />
+                <ScalarProperty Name="CorreInstitucional" ColumnName="CorreInstitucional" />
+                <ScalarProperty Name="CorreoPersonal" ColumnName="CorreoPersonal" />
+                <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="GeneroID" ColumnName="GeneroID" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="TipoUsuarioID" ColumnName="TipoUsuarioID" />
+                <ScalarProperty Name="RolUsuarioID" ColumnName="RolUsuarioID" />
+                <ScalarProperty Name="UsuarioID" ColumnName="UsuarioID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,23 +14,25 @@
 </head>
 
 <body>
-    <div id="auth">
+    <form runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <div id="auth">
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 col-sm-12 mx-auto">
-                    <div class="card pt-4">
-                        <div class="card-body">
-                            <div class="text-center mb-5">
-                                <img src="assets/images/favicon.svg" height="48" class='mb-4'>
-                                <h3>Registrarse</h3>
-                                <p>Inicie sesión para continuar.</p>
-                            </div>
-                            <form action="index.html">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-12 mx-auto">
+                        <div class="card pt-4">
+                            <div class="card-body">
+                                <div class="text-center mb-5">
+                                    <img src="assets/images/favicon.svg" height="48" class='mb-4'>
+                                    <h3>Registrarse</h3>
+                                    <p>Inicie sesión para continuar.</p>
+                                </div>
+
                                 <div class="form-group position-relative has-icon-left">
-                                    <label for="username">Usuario</label>
+                                    <label for="username" >Usuario</label>
                                     <div class="position-relative">
-                                        <input type="text" class="form-control" id="username">
+                                        <input type="text" class="form-control" runat="server" id="iUsuario" required onkeyup="this.value = this.value.toLowerCase();">
                                         <div class="form-control-icon">
                                             <i data-feather="user"></i>
                                         </div>
@@ -38,13 +40,13 @@
                                 </div>
                                 <div class="form-group position-relative has-icon-left">
                                     <div class="clearfix">
-                                        <label for="password">Clave</label>
+                                        <label for="password" >Clave</label>
                                         <a href="auth-forgot-password.html" class='float-right'>
                                             <small>¿Se te olvidó tu contraseña?</small>
                                         </a>
                                     </div>
                                     <div class="position-relative">
-                                        <input type="text" class="form-control" id="password">
+                                        <input type="password" class="form-control" id="iClave" required runat="server">
                                         <div class="form-control-icon">
                                             <i data-feather="lock"></i>
                                         </div>
@@ -58,20 +60,44 @@
                                     </div>
                                 </div>
                                 <div class="clearfix">
-                                    <button class="btn btn-primary float-right">Registrarse</button>
+                                    <asp:Button ID="btnShowPopup" runat="server" Style="display: none" Text="Shouldn't see this button" />
+                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <asp:Button ID="btnRegistrar" CssClass="btn btn-primary float-right" runat="server" Text="Registrarse" OnClick="btnRegistrar_Click" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                 </div>
-                            </form>
-
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <asp:Panel ID="panPopup" Style="display: none" CssClass="pnlBackGround" runat="server">
+            <asp:UpdatePanel ID="upModal" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <fieldset style="color: black; background: white">
+
+                        <legend>Notificaciones</legend>
+
+                        <h5>
+
+                            <asp:Label ID="lblSuccess" runat="server" Text=""></asp:Label>
+                        </h5>
+
+                        <br />
+                    </fieldset>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <a href="#" id="btnCancel" class="btn btn-primary">Aceptar</a>
+        </asp:Panel>
+
+        <ajaxToolkit:ModalPopupExtender ID="modSuccess" runat="server" BackgroundCssClass="modalBackground" TargetControlID="btnShowPopup" PopupControlID="panPopup" CancelControlID="btnCancel">
+        </ajaxToolkit:ModalPopupExtender>
+    </form>
     <script src="assets/js/feather-icons/feather.min.js"></script>
     <script src="assets/js/app.js"></script>
 
     <script src="assets/js/main.js"></script>
 </body>
-
 </html>

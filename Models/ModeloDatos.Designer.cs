@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\fsd\source\repos\sdkpuntocero\WEBhecsa\Models\ModeloDatos.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\fsd\Source\Repos\sdkpuntocero\WEBhecsa\Models\ModeloDatos.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

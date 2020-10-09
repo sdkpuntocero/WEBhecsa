@@ -7,6 +7,39 @@ namespace WEBhecsa.Clases
 {
     public class ControlEmpresa
     {
+        public static bool AltaEmpresaRegistro(string NombreEmpresa)
+        {
+
+            string strNombreEmpresa = string.Empty;
+
+            TextInfo CINombreEmpresa = new CultureInfo("es-MX", false).TextInfo;
+
+            strNombreEmpresa = CINombreEmpresa.ToTitleCase(NombreEmpresa.ToLower());
+
+            try
+            {
+                var iRegistro = new DatosHECSAEntities();
+
+                var iCorporativos = new Empresas
+                {
+                    EmpresaID = Guid.NewGuid(),
+                    NombreEmpresa = strNombreEmpresa,
+                    EstatusRegistroID = 1,
+                    FechaRegistro = DateTime.Now
+                };
+
+                iRegistro.Empresas.Add(iCorporativos);
+                iRegistro.SaveChanges();
+
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         public static bool AltaEmpresa(string NombreEmpresa, string CorreoElectronico, string Telefono, string CalleNumero, string d_codigo, string id_asenta_cpcons, Guid CorporativoID)
         {
 
