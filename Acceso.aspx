@@ -11,6 +11,31 @@
 
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/app.css">
+     <style>
+         .modalBackground {
+            background-color: white;
+            filter: alpha(opacity=50);
+            opacity: 0.7;
+        }
+
+        .pnlBackGround {
+            position: fixed;
+            top: 10%;
+            left: 10px;
+            width: 600px;
+            height: 200px;
+            text-align: center;
+            background-color: White;
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>

@@ -13,6 +13,31 @@
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <style>
+        .modalBackground {
+            background-color: white;
+            filter: alpha(opacity=50);
+            opacity: 0.7;
+        }
+
+        .pnlBackGround {
+            position: fixed;
+            top: 10%;
+            left: 10px;
+            width: 600px;
+            height: 200px;
+            text-align: center;
+            background-color: White;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -29,7 +54,7 @@
                             <div class="sidebar-header">
                                 <h2>
                                     <asp:Label ID="lblEmpresa" runat="server" Text="" Font-Size="Smaller"></asp:Label></span></h2>
-                           
+
                                 <h6><strong>
                                     <asp:Label ID="lblRazonSocial" runat="server" Text="" Font-Size="Smaller"></asp:Label></span></strong></h6>
                             </div>
@@ -39,7 +64,7 @@
                                     <li class="sidebar-title">Main Menu</li>
 
                                     <li class="sidebar-item active">
-                                        <a href="index.html" class="sidebar-link">
+                                        <a href="Panel.aspx" class="sidebar-link">
                                             <i data-feather="home" width="20"></i>
                                             <span>Resumen</span>
                                         </a>
@@ -129,13 +154,21 @@
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
 
-                                            <li>
-                                                <a href="#">Empresa</a>
-                                            </li>
+
+                                            <asp:UpdatePanel ID="upEmpresa" runat="server" UpdateMode="Conditional">
+                                                <ContentTemplate>
+                                                    <li>
+                                                        <asp:LinkButton ID="lkbEmpresa" runat="server" OnClick="lkbEmpresa_Click">
+                                                            <span>Empresa <i class="fa fa-circle" runat="server" id="i1" style="color: #dc3545"></i></span>
+                                                        </asp:LinkButton>
+                                                    </li>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+
                                         </ul>
                                     </li>
 
-                                    <li class="sidebar-title">Administracion</li>
+                                    <li class="sidebar-title">Administración</li>
 
                                     <li class="sidebar-item  ">
                                         <a href="#" class="sidebar-link">
@@ -251,297 +284,478 @@
                             <asp:UpdatePanel ID="upResumen" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
                                     <asp:Panel ID="pnlResumen" runat="server">
-                                                  <div class="page-title">
-                                <h3>Dashboard</h3>
-                                <p class="text-subtitle text-muted">A good dashboard to display your statistics</p>
-                            </div>
-                            <section class="section">
-                                <div class="row mb-2">
-                                    <div class="col-12 col-md-3">
-                                        <div class="card card-statistic">
-                                            <div class="card-body p-0">
-                                                <div class="d-flex flex-column">
-                                                    <div class="px-3 py-3 d-flex justify-content-between">
-                                                        <h3 class="card-title">BALANCE</h3>
-                                                        <div class="card-right d-flex align-items-center">
-                                                            <p>$50 </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chart-wrapper">
-                                                        <canvas id="canvas1" style="height: 100px !important"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="page-title">
+                                            <h3>Dashboard</h3>
+                                            <p class="text-subtitle text-muted">A good dashboard to display your statistics</p>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-md-3">
-                                        <div class="card card-statistic">
-                                            <div class="card-body p-0">
-                                                <div class="d-flex flex-column">
-                                                    <div class="px-3 py-3 d-flex justify-content-between">
-                                                        <h3 class="card-title">Revenue</h3>
-                                                        <div class="card-right d-flex align-items-center">
-                                                            <p>$532,2 </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chart-wrapper">
-                                                        <canvas id="canvas2" style="height: 100px !important"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-3">
-                                        <div class="card card-statistic">
-                                            <div class="card-body p-0">
-                                                <div class="d-flex flex-column">
-                                                    <div class="px-3 py-3 d-flex justify-content-between">
-                                                        <h3 class="card-title">ORDERS</h3>
-                                                        <div class="card-right d-flex align-items-center">
-                                                            <p>1,544 </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chart-wrapper">
-                                                        <canvas id="canvas3" style="height: 100px !important"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-3">
-                                        <div class="card card-statistic">
-                                            <div class="card-body p-0">
-                                                <div class="d-flex flex-column">
-                                                    <div class="px-3 py-3 d-flex justify-content-between">
-                                                        <h3 class="card-title">Sales Today</h3>
-                                                        <div class="card-right d-flex align-items-center">
-                                                            <p>423 </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chart-wrapper">
-                                                        <canvas id="canvas4" style="height: 100px !important"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-md-8">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h3 class="card-heading p-1 pl-3">Sales</h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-4 col-12">
-                                                        <div class="pl-3">
-                                                            <h1 class="mt-5">$21,102</h1>
-                                                            <p class="text-xs">
-                                                                <span class="text-green"><i data-feather="bar-chart"
-                                                                    width="15"></i>+19%</span> than last month
-                                                            </p>
-                                                            <div class="legends">
-                                                                <div class="legend d-flex flex-row align-items-center">
-                                                                    <div class="w-3 h-3 rounded-full bg-info mr-2"></div>
-                                                                    <span
-                                                                        class="text-xs">Last Month</span>
+                                        <section class="section">
+                                            <div class="row mb-2">
+                                                <div class="col-12 col-md-3">
+                                                    <div class="card card-statistic">
+                                                        <div class="card-body p-0">
+                                                            <div class="d-flex flex-column">
+                                                                <div class="px-3 py-3 d-flex justify-content-between">
+                                                                    <h3 class="card-title">BALANCE</h3>
+                                                                    <div class="card-right d-flex align-items-center">
+                                                                        <p>$50 </p>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="legend d-flex flex-row align-items-center">
-                                                                    <div class="w-3 h-3 rounded-full bg-blue mr-2"></div>
-                                                                    <span
-                                                                        class="text-xs">Current Month</span>
+                                                                <div class="chart-wrapper">
+                                                                    <canvas id="canvas1" style="height: 100px !important"></canvas>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-8 col-12">
-                                                        <canvas id="bar"></canvas>
+                                                </div>
+                                                <div class="col-12 col-md-3">
+                                                    <div class="card card-statistic">
+                                                        <div class="card-body p-0">
+                                                            <div class="d-flex flex-column">
+                                                                <div class="px-3 py-3 d-flex justify-content-between">
+                                                                    <h3 class="card-title">Revenue</h3>
+                                                                    <div class="card-right d-flex align-items-center">
+                                                                        <p>$532,2 </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="chart-wrapper">
+                                                                    <canvas id="canvas2" style="height: 100px !important"></canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-3">
+                                                    <div class="card card-statistic">
+                                                        <div class="card-body p-0">
+                                                            <div class="d-flex flex-column">
+                                                                <div class="px-3 py-3 d-flex justify-content-between">
+                                                                    <h3 class="card-title">ORDERS</h3>
+                                                                    <div class="card-right d-flex align-items-center">
+                                                                        <p>1,544 </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="chart-wrapper">
+                                                                    <canvas id="canvas3" style="height: 100px !important"></canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-3">
+                                                    <div class="card card-statistic">
+                                                        <div class="card-body p-0">
+                                                            <div class="d-flex flex-column">
+                                                                <div class="px-3 py-3 d-flex justify-content-between">
+                                                                    <h3 class="card-title">Sales Today</h3>
+                                                                    <div class="card-right d-flex align-items-center">
+                                                                        <p>423 </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="chart-wrapper">
+                                                                    <canvas id="canvas4" style="height: 100px !important"></canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-header d-flex justify-content-between align-items-center">
-                                                <h4 class="card-title">Orders Today</h4>
-                                                <div class="d-flex ">
-                                                    <i data-feather="download"></i>
+                                            <div class="row mb-4">
+                                                <div class="col-md-8">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h3 class="card-heading p-1 pl-3">Sales</h3>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="pl-3">
+                                                                        <h1 class="mt-5">$21,102</h1>
+                                                                        <p class="text-xs">
+                                                                            <span class="text-green"><i data-feather="bar-chart"
+                                                                                width="15"></i>+19%</span> than last month
+                                                                        </p>
+                                                                        <div class="legends">
+                                                                            <div class="legend d-flex flex-row align-items-center">
+                                                                                <div class="w-3 h-3 rounded-full bg-info mr-2"></div>
+                                                                                <span
+                                                                                    class="text-xs">Last Month</span>
+                                                                            </div>
+                                                                            <div class="legend d-flex flex-row align-items-center">
+                                                                                <div class="w-3 h-3 rounded-full bg-blue mr-2"></div>
+                                                                                <span
+                                                                                    class="text-xs">Current Month</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-8 col-12">
+                                                                    <canvas id="bar"></canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                                            <h4 class="card-title">Orders Today</h4>
+                                                            <div class="d-flex ">
+                                                                <i data-feather="download"></i>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body px-0 pb-0">
+                                                            <div class="table-responsive">
+                                                                <table class="table mb-0" id="table1">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Name</th>
+                                                                            <th>Email</th>
+                                                                            <th>Phone</th>
+                                                                            <th>City</th>
+                                                                            <th>Status</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Graiden</td>
+                                                                            <td>vehicula.aliquet@semconsequat.co.uk</td>
+                                                                            <td>076 4820 8838</td>
+                                                                            <td>Offenburg</td>
+                                                                            <td>
+                                                                                <span class="badge bg-success">Active</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Dale</td>
+                                                                            <td>fringilla.euismod.enim@quam.ca</td>
+                                                                            <td>0500 527693</td>
+                                                                            <td>New Quay</td>
+                                                                            <td>
+                                                                                <span class="badge bg-success">Active</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Nathaniel</td>
+                                                                            <td>mi.Duis@diam.edu</td>
+                                                                            <td>(012165) 76278</td>
+                                                                            <td>Grumo Appula</td>
+                                                                            <td>
+                                                                                <span class="badge bg-danger">Inactive</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Darius</td>
+                                                                            <td>velit@nec.com</td>
+                                                                            <td>0309 690 7871</td>
+                                                                            <td>Ways</td>
+                                                                            <td>
+                                                                                <span class="badge bg-success">Active</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Ganteng</td>
+                                                                            <td>velit@nec.com</td>
+                                                                            <td>0309 690 7871</td>
+                                                                            <td>Ways</td>
+                                                                            <td>
+                                                                                <span class="badge bg-success">Active</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Oleg</td>
+                                                                            <td>rhoncus.id@Aliquamauctorvelit.net</td>
+                                                                            <td>0500 441046</td>
+                                                                            <td>Rossignol</td>
+                                                                            <td>
+                                                                                <span class="badge bg-success">Active</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Kermit</td>
+                                                                            <td>diam.Sed.diam@anteVivamusnon.org</td>
+                                                                            <td>(01653) 27844</td>
+                                                                            <td>Patna</td>
+                                                                            <td>
+                                                                                <span class="badge bg-success">Active</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="card ">
+                                                        <div class="card-header">
+                                                            <h4>Your Earnings</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="radialBars"></div>
+                                                            <div class="text-center mb-5">
+                                                                <h6>From last month</h6>
+                                                                <h1 class="text-green">+$2,134</h1>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card widget-todo">
+                                                        <div
+                                                            class="card-header border-bottom d-flex justify-content-between align-items-center">
+                                                            <h4 class="card-title d-flex">
+                                                                <i class="bx bx-check font-medium-5 pl-25 pr-75"></i>Progress
+                                                            </h4>
+                                                        </div>
+                                                        <div class="card-body px-0 py-1">
+                                                            <table class="table table-borderless">
+                                                                <tr>
+                                                                    <td class="col-3">UI Design</td>
+                                                                    <td class="col-6">
+                                                                        <div class="progress progress-info">
+                                                                            <div class="progress-bar" role="progressbar" style="width: 60%"
+                                                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="col-3 text-center">60%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-3">VueJS</td>
+                                                                    <td class="col-6">
+                                                                        <div class="progress progress-success">
+                                                                            <div class="progress-bar" role="progressbar" style="width: 35%"
+                                                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="col-3 text-center">30%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-3">Laravel</td>
+                                                                    <td class="col-6">
+                                                                        <div class="progress progress-danger">
+                                                                            <div class="progress-bar" role="progressbar" style="width: 50%"
+                                                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="col-3 text-center">50%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-3">ReactJS</td>
+                                                                    <td class="col-6">
+                                                                        <div class="progress progress-primary">
+                                                                            <div class="progress-bar" role="progressbar" style="width: 80%"
+                                                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="col-3 text-center">80%</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="col-3">Go</td>
+                                                                    <td class="col-6">
+                                                                        <div class="progress progress-secondary">
+                                                                            <div class="progress-bar" role="progressbar" style="width: 65%"
+                                                                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="col-3 text-center">65%</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="card-body px-0 pb-0">
-                                                <div class="table-responsive">
-                                                    <table class="table mb-0" id="table1">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>Email</th>
-                                                                <th>Phone</th>
-                                                                <th>City</th>
-                                                                <th>Status</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Graiden</td>
-                                                                <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                                                <td>076 4820 8838</td>
-                                                                <td>Offenburg</td>
-                                                                <td>
-                                                                    <span class="badge bg-success">Active</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Dale</td>
-                                                                <td>fringilla.euismod.enim@quam.ca</td>
-                                                                <td>0500 527693</td>
-                                                                <td>New Quay</td>
-                                                                <td>
-                                                                    <span class="badge bg-success">Active</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Nathaniel</td>
-                                                                <td>mi.Duis@diam.edu</td>
-                                                                <td>(012165) 76278</td>
-                                                                <td>Grumo Appula</td>
-                                                                <td>
-                                                                    <span class="badge bg-danger">Inactive</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Darius</td>
-                                                                <td>velit@nec.com</td>
-                                                                <td>0309 690 7871</td>
-                                                                <td>Ways</td>
-                                                                <td>
-                                                                    <span class="badge bg-success">Active</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Ganteng</td>
-                                                                <td>velit@nec.com</td>
-                                                                <td>0309 690 7871</td>
-                                                                <td>Ways</td>
-                                                                <td>
-                                                                    <span class="badge bg-success">Active</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Oleg</td>
-                                                                <td>rhoncus.id@Aliquamauctorvelit.net</td>
-                                                                <td>0500 441046</td>
-                                                                <td>Rossignol</td>
-                                                                <td>
-                                                                    <span class="badge bg-success">Active</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Kermit</td>
-                                                                <td>diam.Sed.diam@anteVivamusnon.org</td>
-                                                                <td>(01653) 27844</td>
-                                                                <td>Patna</td>
-                                                                <td>
-                                                                    <span class="badge bg-success">Active</span>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card ">
-                                            <div class="card-header">
-                                                <h4>Your Earnings</h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <div id="radialBars"></div>
-                                                <div class="text-center mb-5">
-                                                    <h6>From last month</h6>
-                                                    <h1 class="text-green">+$2,134</h1>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card widget-todo">
-                                            <div
-                                                class="card-header border-bottom d-flex justify-content-between align-items-center">
-                                                <h4 class="card-title d-flex">
-                                                    <i class="bx bx-check font-medium-5 pl-25 pr-75"></i>Progress
-                                                </h4>
-                                            </div>
-                                            <div class="card-body px-0 py-1">
-                                                <table class="table table-borderless">
-                                                    <tr>
-                                                        <td class="col-3">UI Design</td>
-                                                        <td class="col-6">
-                                                            <div class="progress progress-info">
-                                                                <div class="progress-bar" role="progressbar" style="width: 60%"
-                                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="col-3 text-center">60%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-3">VueJS</td>
-                                                        <td class="col-6">
-                                                            <div class="progress progress-success">
-                                                                <div class="progress-bar" role="progressbar" style="width: 35%"
-                                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="col-3 text-center">30%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-3">Laravel</td>
-                                                        <td class="col-6">
-                                                            <div class="progress progress-danger">
-                                                                <div class="progress-bar" role="progressbar" style="width: 50%"
-                                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="col-3 text-center">50%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-3">ReactJS</td>
-                                                        <td class="col-6">
-                                                            <div class="progress progress-primary">
-                                                                <div class="progress-bar" role="progressbar" style="width: 80%"
-                                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="col-3 text-center">80%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-3">Go</td>
-                                                        <td class="col-6">
-                                                            <div class="progress progress-secondary">
-                                                                <div class="progress-bar" role="progressbar" style="width: 65%"
-                                                                    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="col-3 text-center">65%</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
+                                        </section>
                                     </asp:Panel>
-                                  
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                             <asp:UpdatePanel ID="upNotificacionesF" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
+                                    <asp:Panel ID="pnlNotificacionesF" runat="server" Visible="false">
+                                        <div class="col-md-6">
+                                            <h5 class="card-title">Datos Notificaciones</h5>
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                        <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">Editar</a>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-9">
+                                                    <div class="tab-content" id="v-pills-tabContent">
+                                                        <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                                            <div class="row">
+
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="username-column" tooltip="Para Notificaciones">*Correo electrónico</label>
+                                                                        <input type="text" runat="server" id="iCorreoElectronicoNotificacion" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="first-name-column">*Usuario Correo</label>
+                                                                        <input type="text" runat="server" id="iUsuarioNotificacion" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="last-name-column">*Clave</label>
+                                                                        <input type="password" runat="server" id="iClaveNotificacion" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="last-name-column">*Asunto</label>
+                                                                        <input type="text" runat="server" id="iAsuntoNotificacion" class="form-control" required onkeyup="this.value = this.value.toUpperCase();">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="last-name-column">*SMTP</label>
+                                                                        <input type="text" runat="server" id="iSMTPNotificacion" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="last-name-column">*Puerto</label>
+                                                                        <input type="number" runat="server" id="iPuertoNotificacion" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix">
+                                                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                                                    <ContentTemplate>
+                                                                        <asp:Button CssClass="btn btn-primary float-right" type="submit" ID="btnRegistroNotificacion" runat="server" Text="Registrar" OnClick="btnRegistroNotificacion_Click" />
+                                                                    </ContentTemplate>
+                                                                </asp:UpdatePanel>
+                                                                <asp:UpdateProgress ID="upCarga" runat="server" DynamicLayout="true">
+                                                                    <ProgressTemplate>
+                                                                        <div id="overlay">
+                                                                            <div class="center">
+                                                                                <img alt="" src="assets/image/ajax-loader.gif" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </ProgressTemplate>
+                                                                </asp:UpdateProgress>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
+                            <asp:UpdatePanel ID="upEmpresaF" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:Panel ID="pnlEmpresaF" runat="server" Visible="false">
+                                        <div class="col-md-6">
+                                            <h5 class="card-title">Datos Empresa</h5>
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                        <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">Editar</a>
+                                                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Datos Fiscales</a>
 
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-9">
+                                                    <div class="tab-content" id="v-pills-tabContent">
+                                                        <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                                            <div class="row">
+
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="username-column" tooltip="Para Notificaciones">*Nombre Comercial</label>
+                                                                        <input type="text" runat="server" id="iNombreComercial" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="first-name-column">*Correo Electrónico</label>
+                                                                        <input type="text" runat="server" id="iCorreoElectronicoEmpresa" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="last-name-column">*Teléfono</label>
+                                                                        <input type="text" runat="server" id="iTelefonoEmpresa" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="last-name-column">*Calle y Numero</label>
+                                                                        <input type="text" runat="server" id="iCalleNumEmpresa" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <asp:UpdatePanel ID="upPage" runat="server" UpdateMode="Conditional">
+                                                                <ContentTemplate>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 mb-1">
+                                                                            <div class="input-group mb-3">
+                                                                                <span class="input-group-text" id="basic-addon1">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                                                                        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+                                                                                <input type="text" class="form-control" runat="server" id="iCPEmpresa" placeholder="*Código Postal" aria-label="Recipient's username" aria-describedby="button-addon2" required>
+                                                                                <asp:LinkButton ID="lkbCP" runat="server" CssClass="btn btn-outline-secondary" TabIndex="5" OnClick="lkbCP_Click">Buscar
+                                                                                </asp:LinkButton>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <select class="form-control" runat="server" id="sColonia" required="required" tabindex="6"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" runat="server" id="iMunicipio" placeholder="Municipio" disabled="disabled" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+
+                                                                                <input type="text" class="form-control" runat="server" id="iEstado" placeholder="Estado" disabled="disabled" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                            <div class="clearfix">
+                                                                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                                                    <ContentTemplate>
+                                                                        <asp:Button CssClass="btn btn-primary float-right" type="submit" ID="btnRegistrarEmpresa" runat="server" Text="Registrar" OnClick="btnRegistrarEmpresa_Click" />
+                                                                    </ContentTemplate>
+                                                                </asp:UpdatePanel>
+                                                                <asp:UpdateProgress ID="UpdateProgress1" runat="server" DynamicLayout="true">
+                                                                    <ProgressTemplate>
+                                                                        <div id="overlay">
+                                                                            <div class="center">
+                                                                                <img alt="" src="assets/image/ajax-loader.gif" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </ProgressTemplate>
+                                                                </asp:UpdateProgress>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                                            Integer interdum diam eleifend metus lacinia, quis gravida eros mollis. Fusce non sapien sit amet magna dapibus
+                                        ultrices. Morbi tincidunt magna ex, eget faucibus sapien bibendum non. Duis a mauris ex. Ut finibus risus sed massa
+                                        mattis porta. Aliquam sagittis massa et purus efficitur ultricies.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
 
                         <footer>
@@ -560,7 +774,30 @@
                     </div>
                 </div>
             </ContentTemplate>
+
         </asp:UpdatePanel>
+        <asp:Button ID="btnShowPopup" runat="server" Style="display: none" />
+        <asp:Panel ID="panPopup" Style="display: none" CssClass="pnlBackGround" runat="server">
+            <asp:UpdatePanel ID="upModal" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <fieldset style="color: black; background: white">
+
+                        <legend>Notificaciones</legend>
+
+                        <h5>
+
+                            <asp:Label ID="lblSuccess" runat="server" Text=""></asp:Label>
+                        </h5>
+
+                        <br />
+                    </fieldset>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <a href="#" id="btnCancel" class="btn btn-primary">Aceptar</a>
+        </asp:Panel>
+
+        <ajaxToolkit:ModalPopupExtender ID="modSuccess" runat="server" BackgroundCssClass="modalBackground" TargetControlID="btnShowPopup" PopupControlID="panPopup" CancelControlID="btnCancel">
+        </ajaxToolkit:ModalPopupExtender>
     </form>
     <script src="assets/js/feather-icons/feather.min.js"></script>
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>

@@ -9,7 +9,6 @@ namespace WEBhecsa.Clases
     {
         public static bool AltaEmpresaRegistro(string NombreEmpresa)
         {
-
             string strNombreEmpresa = string.Empty;
 
             TextInfo CINombreEmpresa = new CultureInfo("es-MX", false).TextInfo;
@@ -31,7 +30,6 @@ namespace WEBhecsa.Clases
                 iRegistro.Empresas.Add(iCorporativos);
                 iRegistro.SaveChanges();
 
-
                 return true;
             }
             catch (Exception e)
@@ -42,7 +40,6 @@ namespace WEBhecsa.Clases
 
         public static bool AltaEmpresa(string NombreEmpresa, string CorreoElectronico, string Telefono, string CalleNumero, string d_codigo, string id_asenta_cpcons, Guid CorporativoID)
         {
-
             string strNombreEmpresa = string.Empty, strCalleNumero = string.Empty;
 
             TextInfo CINombreEmpresa = new CultureInfo("es-MX", false).TextInfo;
@@ -80,13 +77,57 @@ namespace WEBhecsa.Clases
                 iRegistro.Ubicaciones.Add(iUbicaciones);
                 iRegistro.SaveChanges();
 
-
                 return true;
             }
             catch (Exception e)
             {
                 return false;
             }
+        }
+
+        public static bool ActualizaEmpresa(string iNombreComercial, string iCorreoElectronicoEmpresa, string iTelefonoEmpresa, string iCalleNumEmpresa, string iCPEmpresa, string sColonia)
+        {
+            Guid iEmpresaID, iUbicacionID;
+            using (var Modelo = new DatosHECSAEntities())
+            {
+                var iModeloU = (from a in Modelo.Empresas
+                                select a).ToList();
+
+                iEmpresaID = Guid.Parse(iModeloU[0].EmpresaID.ToString());
+            }
+
+            iUbicacionID = Guid.NewGuid();
+
+            var iRegistro = new DatosHECSAEntities();
+
+            var iUbicaciones = new Ubicaciones
+            {
+                UbicacionID = iUbicacionID,
+                TipoUbicacionID = 1,
+                CalleNumero = iCalleNumEmpresa,
+                CodigoPostal = iCPEmpresa,
+                ColoniaID = sColonia,
+                EstatusRegistroID = 1,
+                FechaRegistro = DateTime.Now
+            };
+
+            iRegistro.Ubicaciones.Add(iUbicaciones);
+            iRegistro.SaveChanges();
+
+            using (var Modelo = new DatosHECSAEntities())
+            {
+                var iModelo = (from c in Modelo.Empresas
+                               select c).FirstOrDefault();
+
+                iModelo.NombreEmpresa = iNombreComercial;
+                iModelo.CorreoElectronico = iCorreoElectronicoEmpresa;
+                iModelo.Telefono = iTelefonoEmpresa;
+                iModelo.UbicacionID = iUbicacionID;
+
+                Modelo.SaveChanges();
+            }
+
+            return true;
         }
 
         public static bool ActualizaUsuarioPerfil(Guid iUsuarioID, int intGeneroID, DateTime dtFechaNacimiento, string strCorreoPersonal, string strCelular, string strTelefonoContacto, string strCodigoPostal, string intColoniaID, string strClaveNueva)
@@ -122,7 +163,6 @@ namespace WEBhecsa.Clases
                 }
                 else
                 {
-
                     var iModeloUU = (from c in Modelo.Ubicaciones
                                      where c.UbicacionID == ubicacionIDn
                                      select c).FirstOrDefault();
@@ -131,7 +171,6 @@ namespace WEBhecsa.Clases
                     iModeloUU.CodigoPostal = strCodigoPostal;
                     iModeloUU.ColoniaID = intColoniaID;
                 }
-
 
                 var iModelo = (from c in Modelo.Usuarios
                                where c.UsuarioID == iUsuarioID

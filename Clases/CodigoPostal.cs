@@ -11,7 +11,7 @@ namespace WEBhecsa.Clases
             DataSet ds = new DataSet();
             DataTable dt = new DataTable();
 
-            dt.Columns.Add("ColoniaID", typeof(int));
+            dt.Columns.Add("ColoniaID", typeof(string));
             dt.Columns.Add("Colonia", typeof(string));
             dt.Columns.Add("Municipio", typeof(string));
             dt.Columns.Add("Estado", typeof(string));

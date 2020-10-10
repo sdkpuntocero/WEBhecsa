@@ -583,6 +583,7 @@
     </Compile>
     <Compile Include="Clases\CodigoPostal.cs" />
     <Compile Include="Clases\ControlEmpresa.cs" />
+    <Compile Include="Clases\ControlNotificaciones.cs" />
     <Compile Include="Clases\ControlUsuarios.cs" />
     <Compile Include="Clases\Encrypta.cs" />
     <Compile Include="Clases\EnviarCorreo.cs" />

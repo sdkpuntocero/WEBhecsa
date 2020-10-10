@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/app.css">
     <style>
-        .modalBackground {
+         .modalBackground {
             background-color: white;
             filter: alpha(opacity=50);
             opacity: 0.7;
@@ -28,7 +28,17 @@
             text-align: center;
             background-color: White;
         }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+
+
+            text-align: center;
+        }
     </style>
+
 </head>
 
 <body>
@@ -43,7 +53,7 @@
                             <div class="card-body">
                                 <div class="text-center mb-5">
                                     <%--<img src="assets/images/favicon.svg" height="48" class="mb-4">--%>
-                                    <h3>Registro Incial</h3>
+                                    <h3>Registro Inicial</h3>
                                     <p>Por favor complete el formulario para registrarse..</p>
                                 </div>
 
@@ -51,31 +61,31 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="first-name-column">*Nombre Comercial de la Empresa</label>
-                                            <input type="text" runat="server" id="iNombreComercial" class="form-control" name="fname-column" required onkeyup="this.value = this.value.toUpperCase();">
+                                            <input type="text" runat="server" id="iNombreComercial" class="form-control"  required onkeyup="this.value = this.value.toUpperCase();">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="username-column" tooltip="Para Notificaciones">*Correo electrónico para contacto</label>
-                                            <input type="text" runat="server" id="iCorreoElectronicoContacto" class="form-control" name="username-column" required>
+                                            <input type="email" runat="server" id="iCorreoElectronicoContacto" class="form-control"  required>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="last-name-column">*Nombre(s)</label>
-                                            <input type="text" runat="server" id="iNombreAdministrador" class="form-control" name="lname-column" required onkeyup="this.value = this.value.toUpperCase();">
+                                            <input type="text" runat="server" id="iNombreAdministrador" class="form-control"  required onkeyup="this.value = this.value.toUpperCase();">
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="last-name-column">*Apellido Paterno</label>
-                                            <input type="text" runat="server" id="iApellidoPaternoAdministrador" class="form-control" name="lname-column" required onkeyup="this.value = this.value.toUpperCase();">
+                                            <input type="text" runat="server" id="iApellidoPaternoAdministrador" class="form-control"  required onkeyup="this.value = this.value.toUpperCase();">
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label for="last-name-column">*Apellido Materno</label>
-                                            <input type="text" runat="server" id="iApellidoMaternoAdministrador" class="form-control" name="lname-column" required onkeyup="this.value = this.value.toUpperCase();">
+                                            <input type="text" runat="server" id="iApellidoMaternoAdministrador" class="form-control"  required onkeyup="this.value = this.value.toUpperCase();">
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +103,7 @@
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
 
-                                    <asp:Button ID="btnShowPopup" runat="server" Style="display: none" Text="Shouldn't see this button" />
+                                    <asp:Button ID="btnShowPopup" runat="server" Style="display: none" />
 
                                     <asp:UpdateProgress ID="upCarga" runat="server" DynamicLayout="true">
                                         <ProgressTemplate>
