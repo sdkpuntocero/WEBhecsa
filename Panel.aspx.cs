@@ -78,6 +78,8 @@ namespace WEBhecsa
             upEmpresaF.Update();
             pnlNotificacionesF.Visible = true;
             upNotificacionesF.Update();
+            pnlUsuarios.Visible = false;
+            upUsuariosF.Update();
         }
 
         private void CargaNotificaciones()
@@ -127,7 +129,6 @@ namespace WEBhecsa
                 iNombreComercial.Value = iModelo.NombreEmpresa;
                 iCorreoElectronicoEmpresa.Value = iModelo.CorreoElectronico;
                 iTelefonoEmpresa.Value = iModelo.Telefono;
-
 
                 try
                 {
@@ -180,7 +181,6 @@ namespace WEBhecsa
                     sColonia.Attributes.Add("required", "required");
                 }
             }
-
         }
 
         protected void lkbEmpresa_Click(object sender, EventArgs e)
@@ -193,6 +193,8 @@ namespace WEBhecsa
             upNotificacionesF.Update();
             pnlEmpresaF.Visible = true;
             upEmpresaF.Update();
+            pnlUsuarios.Visible = false;
+            upUsuariosF.Update();
         }
 
         protected void lkbCP_Click(object sender, EventArgs e)
@@ -236,7 +238,6 @@ namespace WEBhecsa
             string striCPEmpresa = Request.Form["iCPEmpresa"];
             string strsColonia = Request.Form["sColonia"];
 
-
             if (ControlEmpresa.ActualizaEmpresa(striNombreComercial, striCorreoElectronicoEmpresa, striTelefonoEmpresa, striCalleNumEmpresa, striCPEmpresa, strsColonia))
             {
                 iNombreComercial.Value = String.Empty;
@@ -244,6 +245,292 @@ namespace WEBhecsa
                 upModal.Update();
                 modSuccess.Show();
             }
+        }
+
+        protected void lkbCPDatosFiscales_Click(object sender, EventArgs e)
+        {
+            using (DataSet ListCP = CodigoPostal.FiltroCP(iCPDatosFiscales.Value))
+            {
+                if (ListCP.Tables[0].Rows.Count == 0)
+                {
+                    iColoniaDatosFiscales.Items.Clear();
+
+                    iColoniaDatosFiscales.Items.Insert(0, new ListItem("Colonia", string.Empty));
+
+                    iMunicipioDatosFiscales.Value = string.Empty;
+                    iEstadoDatosFiscales.Value = string.Empty;
+                    iColoniaDatosFiscales.Attributes.Add("required", "required");
+                }
+                else
+                {
+                    iColoniaDatosFiscales.DataSource = ListCP;
+                    iColoniaDatosFiscales.DataTextField = "Colonia";
+                    iColoniaDatosFiscales.DataValueField = "ColoniaID";
+                    iColoniaDatosFiscales.DataBind();
+
+                    iMunicipioDatosFiscales.Value = ListCP.Tables[0].Rows[0]["Municipio"].ToString();
+                    iEstadoDatosFiscales.Value = ListCP.Tables[0].Rows[0]["Estado"].ToString();
+                    iColoniaDatosFiscales.Attributes.Add("required", string.Empty);
+                    iColoniaDatosFiscales.Items.Insert(0, new ListItem("Colonia", string.Empty));
+                }
+            }
+
+            iColoniaDatosFiscales.Focus();
+            upCPDatosFiscales.Update();
+        }
+
+        protected void btnRegistrarDatosFiscales_Click(object sender, EventArgs e)
+        {
+            string striRFCDatosFiscales = Request.Form["iRFCDatosFiscales"];
+            string striRazonSocialDatosFiscales = Request.Form["iRazonSocialDatosFiscales"];
+            string striCorreoElectronicoDatosFiscales = Request.Form["iCorreoElectronicoDatosFiscales"];
+            string striTelefonoDatosFiscales = Request.Form["iTelefonoDatosFiscales"];
+            string striCalleNumeroDatosFiscales = Request.Form["iCalleNumeroDatosFiscales"];
+            string striCPDatosFiscales = Request.Form["iCPDatosFiscales"];
+            string striColoniaDatosFiscales = Request.Form["iColoniaDatosFiscales"];
+            Guid iEmpresaID, iUbicacionID;
+            using (var Modelo = new DatosHECSAEntities())
+            {
+                var iModeloU = (from a in Modelo.DatosFiscales
+                                select a).ToList();
+
+                if (iModeloU.Count == 0)
+                {
+                    if (ControlEmpresa.AgregaEmpresaDatosFiscales(striRFCDatosFiscales, striRazonSocialDatosFiscales, striCorreoElectronicoDatosFiscales, striTelefonoDatosFiscales, striCalleNumeroDatosFiscales, striCPDatosFiscales, striColoniaDatosFiscales))
+                    {
+                        iRFCDatosFiscales.Value = String.Empty;
+                        iRazonSocialDatosFiscales.Value = String.Empty;
+                        iCorreoElectronicoDatosFiscales.Value = String.Empty;
+                        iTelefonoDatosFiscales.Value = String.Empty;
+                        iCalleNumeroDatosFiscales.Value = String.Empty;
+                        iCPDatosFiscales.Value = String.Empty;
+                        iColoniaDatosFiscales.Value = String.Empty;
+
+                        lblSuccess.Text = "Datos actualizados con éxito";
+                        upModal.Update();
+                        modSuccess.Show();
+                    }
+                }
+                else
+                {
+                    if (ControlEmpresa.ActualizaEmpresaDatosFiscales(striRFCDatosFiscales, striRazonSocialDatosFiscales, striCorreoElectronicoDatosFiscales, striTelefonoDatosFiscales, striCalleNumeroDatosFiscales, striCPDatosFiscales, striColoniaDatosFiscales))
+                    {
+                        iRFCDatosFiscales.Value = String.Empty;
+                        iRazonSocialDatosFiscales.Value = String.Empty;
+                        iCorreoElectronicoDatosFiscales.Value = String.Empty;
+                        iTelefonoDatosFiscales.Value = String.Empty;
+                        iCalleNumeroDatosFiscales.Value = String.Empty;
+                        iCPDatosFiscales.Value = String.Empty;
+                        iColoniaDatosFiscales.Value = String.Empty;
+
+                        lblSuccess.Text = "Datos actualizados con éxito";
+                        upModal.Update();
+                        modSuccess.Show();
+                    }
+                }
+            }
+        }
+
+        protected void lkbEditaEmpresa_Click(object sender, EventArgs e)
+        {
+            pnlEditaEmpresaDatosFiscales.Visible = false;
+            pnlEditaEmpresa.Visible = true;
+            upEmpresaF.Update();
+        }
+
+        protected void lkbEditaEmpresaDatosFiscales_Click(object sender, EventArgs e)
+        {
+            CargaCPDatosFiscales();
+            pnlEditaEmpresa.Visible = false;
+            pnlEditaEmpresaDatosFiscales.Visible = true;
+            upEmpresaF.Update();
+        }
+
+        private void CargaCPDatosFiscales()
+        {
+            iColoniaDatosFiscales.Items.Clear();
+            iColoniaDatosFiscales.Items.Insert(0, new ListItem("Seleccionar", string.Empty));
+
+            try
+            {
+                using (DatosHECSAEntities Modelo = new DatosHECSAEntities())
+                {
+                    var iModelo = (from a in Modelo.DatosFiscales
+                                   select a).FirstOrDefault();
+
+                    if (iModelo != null)
+                    {
+                        iRFCDatosFiscales.Value = iModelo.RFC;
+                        iRazonSocialDatosFiscales.Value = iModelo.RazonSocial;
+                        iCorreoElectronicoDatosFiscales.Value = iModelo.CorreoElectronico;
+                        iTelefonoDatosFiscales.Value = iModelo.Telefono;
+
+                        var iModeloU = (from a in Modelo.DatosFiscales
+                                        join b in Modelo.Ubicaciones on a.UbicacionID equals b.UbicacionID
+                                        select new
+                                        {
+                                            b.CalleNumero,
+                                            b.CodigoPostal,
+                                            b.ColoniaID
+                                        }).FirstOrDefault();
+
+                        iCalleNumeroDatosFiscales.Value = iModeloU.CalleNumero;
+
+                        using (DataSet ListCP = CodigoPostal.FiltroCP(iModeloU.CodigoPostal))
+                        {
+                            if (ListCP.Tables[0].Rows.Count == 0)
+                            {
+                                iColoniaDatosFiscales.Items.Clear();
+
+                                iColoniaDatosFiscales.Items.Insert(0, new ListItem("Colonia", string.Empty));
+
+                                iMunicipioDatosFiscales.Value = string.Empty;
+                                iEstadoDatosFiscales.Value = string.Empty;
+                                iColoniaDatosFiscales.Attributes.Add("required", "required");
+                            }
+                            else
+                            {
+                                iColoniaDatosFiscales.DataSource = ListCP;
+                                iColoniaDatosFiscales.DataTextField = "Colonia";
+                                iColoniaDatosFiscales.DataValueField = "ColoniaID";
+                                iColoniaDatosFiscales.DataBind();
+
+                                iMunicipioDatosFiscales.Value = ListCP.Tables[0].Rows[0]["Municipio"].ToString();
+                                iEstadoDatosFiscales.Value = ListCP.Tables[0].Rows[0]["Estado"].ToString();
+                                iColoniaDatosFiscales.Attributes.Add("required", string.Empty);
+                                iColoniaDatosFiscales.Value = iModeloU.ColoniaID;
+                                iCPDatosFiscales.Value = iModeloU.CodigoPostal;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                iColoniaDatosFiscales.Items.Clear();
+
+                iColoniaDatosFiscales.Items.Insert(0, new ListItem("Colonia", string.Empty));
+
+                iMunicipioDatosFiscales.Value = string.Empty;
+                iEstadoDatosFiscales.Value = string.Empty;
+                iColoniaDatosFiscales.Attributes.Add("required", "required");
+            }
+        }
+
+        protected void lkbUsuarios_Click(object sender, EventArgs e)
+        {
+            CargaCPUsuarios();
+            pnlResumen.Visible = false;
+            upResumen.Update();
+            pnlEmpresaF.Visible = false;
+            upEmpresaF.Update();
+            pnlNotificacionesF.Visible = false;
+            upNotificacionesF.Update();
+            pnlUsuarios.Visible = true;
+            upUsuariosF.Update();
+        }
+
+        private void CargaCPUsuarios()
+        {
+            iColoniaUsuarios.Items.Clear();
+            iColoniaUsuarios.Items.Insert(0, new ListItem("Seleccionar", string.Empty));
+
+            try
+            {
+                using (DatosHECSAEntities Modelo = new DatosHECSAEntities())
+                {
+                    var iModeloU = (from a in Modelo.Usuarios
+                                    join b in Modelo.Ubicaciones on a.UbicacionID equals b.UbicacionID
+                                    where a.UsuarioID != fUsuarioID
+                                    select new
+                                    {
+                                        b.CalleNumero,
+                                        b.CodigoPostal,
+                                        b.ColoniaID
+                                    }).FirstOrDefault();
+                    if (iModeloU != null)
+                    {
+
+
+                        using (DataSet ListCP = CodigoPostal.FiltroCP(iModeloU.CodigoPostal))
+                        {
+                            if (ListCP.Tables[0].Rows.Count == 0)
+                            {
+                                iColoniaUsuarios.Items.Clear();
+
+                                iColoniaUsuarios.Items.Insert(0, new ListItem("Colonia", string.Empty));
+
+                                iMunicipioUsuarios.Value = string.Empty;
+                                iEstadoUsuarios.Value = string.Empty;
+                                iColoniaUsuarios.Attributes.Add("required", "required");
+                            }
+                            else
+                            {
+                                iColoniaUsuarios.DataSource = ListCP;
+                                iColoniaUsuarios.DataTextField = "Colonia";
+                                iColoniaUsuarios.DataValueField = "ColoniaID";
+                                iColoniaUsuarios.DataBind();
+
+                                iMunicipioUsuarios.Value = ListCP.Tables[0].Rows[0]["Municipio"].ToString();
+                                iEstadoUsuarios.Value = ListCP.Tables[0].Rows[0]["Estado"].ToString();
+                                iColoniaUsuarios.Attributes.Add("required", string.Empty);
+                                iColoniaUsuarios.Value = iModeloU.ColoniaID;
+                                iCPUsuarios.Value = iModeloU.CodigoPostal;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                iColoniaUsuarios.Items.Clear();
+
+                iColoniaUsuarios.Items.Insert(0, new ListItem("Colonia", string.Empty));
+
+                iMunicipioUsuarios.Value = string.Empty;
+                iEstadoUsuarios.Value = string.Empty;
+                iColoniaUsuarios.Attributes.Add("required", "required");
+            }
+        }
+
+        protected void lkbProveedores_Click(object sender, EventArgs e)
+        {
+        }
+
+        protected void lkbProductos_Click(object sender, EventArgs e)
+        {
+        }
+
+        protected void lkbCPUsuarios_Click(object sender, EventArgs e)
+        {
+            using (DataSet ListCP = CodigoPostal.FiltroCP(iCPUsuarios.Value))
+            {
+                if (ListCP.Tables[0].Rows.Count == 0)
+                {
+                    iColoniaUsuarios.Items.Clear();
+
+                    iColoniaUsuarios.Items.Insert(0, new ListItem("Colonia", string.Empty));
+
+                    iMunicipioUsuarios.Value = string.Empty;
+                    iEstadoUsuarios.Value = string.Empty;
+                    iColoniaUsuarios.Attributes.Add("required", "required");
+                }
+                else
+                {
+                    iColoniaUsuarios.DataSource = ListCP;
+                    iColoniaUsuarios.DataTextField = "Colonia";
+                    iColoniaUsuarios.DataValueField = "ColoniaID";
+                    iColoniaUsuarios.DataBind();
+
+                    iMunicipio.Value = ListCP.Tables[0].Rows[0]["Municipio"].ToString();
+                    iEstado.Value = ListCP.Tables[0].Rows[0]["Estado"].ToString();
+                    iColoniaUsuarios.Attributes.Add("required", string.Empty);
+                    iColoniaUsuarios.Items.Insert(0, new ListItem("Colonia", string.Empty));
+                }
+            }
+
+            iColoniaUsuarios.Focus();
+            upPage.Update();
         }
     }
 }

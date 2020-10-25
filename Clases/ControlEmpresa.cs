@@ -87,6 +87,14 @@ namespace WEBhecsa.Clases
 
         public static bool ActualizaEmpresa(string iNombreComercial, string iCorreoElectronicoEmpresa, string iTelefonoEmpresa, string iCalleNumEmpresa, string iCPEmpresa, string sColonia)
         {
+            string striNombreComercial = string.Empty, striCalleNumEmpresa = string.Empty;
+
+            TextInfo CINombreEmpresa = new CultureInfo("es-MX", false).TextInfo;
+            TextInfo CICalleNum = new CultureInfo("es-MX", false).TextInfo;
+
+            striNombreComercial = CINombreEmpresa.ToTitleCase(iNombreComercial.ToLower());
+            striCalleNumEmpresa = CICalleNum.ToTitleCase(iCalleNumEmpresa.ToLower());
+
             Guid iEmpresaID, iUbicacionID;
             using (var Modelo = new DatosHECSAEntities())
             {
@@ -96,30 +104,54 @@ namespace WEBhecsa.Clases
                 iEmpresaID = Guid.Parse(iModeloU[0].EmpresaID.ToString());
             }
 
-            iUbicacionID = Guid.NewGuid();
-
             var iRegistro = new DatosHECSAEntities();
 
-            var iUbicaciones = new Ubicaciones
+            using (var Modelo = new DatosHECSAEntities())
             {
-                UbicacionID = iUbicacionID,
-                TipoUbicacionID = 1,
-                CalleNumero = iCalleNumEmpresa,
-                CodigoPostal = iCPEmpresa,
-                ColoniaID = sColonia,
-                EstatusRegistroID = 1,
-                FechaRegistro = DateTime.Now
-            };
+                var iModelo = (from a in Modelo.Empresas
+                               join b in Modelo.Ubicaciones on a.UbicacionID equals b.UbicacionID
+                               select a).ToList();
 
-            iRegistro.Ubicaciones.Add(iUbicaciones);
-            iRegistro.SaveChanges();
+                iUbicacionID = Guid.NewGuid();
+
+                if (iModelo.Count == 0)
+                {
+                    var iUbicaciones = new Ubicaciones
+                    {
+                        UbicacionID = iUbicacionID,
+                        TipoUbicacionID = 1,
+                        CalleNumero = iCalleNumEmpresa,
+                        CodigoPostal = iCPEmpresa,
+                        ColoniaID = sColonia,
+                        EstatusRegistroID = 1,
+                        FechaRegistro = DateTime.Now
+                    };
+
+                    iRegistro.Ubicaciones.Add(iUbicaciones);
+                    iRegistro.SaveChanges();
+                    Modelo.SaveChanges();
+                }
+                else
+                {
+                    iUbicacionID = Guid.Parse(iModelo[0].UbicacionID.ToString());
+                    var iModeloU = (from c in Modelo.Ubicaciones
+                                    where c.UbicacionID == iUbicacionID
+                                    select c).FirstOrDefault();
+
+                    iModeloU.CalleNumero = iCalleNumEmpresa;
+                    iModeloU.CodigoPostal = iCPEmpresa;
+                    iModeloU.ColoniaID = sColonia;
+
+                    Modelo.SaveChanges();
+                }
+            }
 
             using (var Modelo = new DatosHECSAEntities())
             {
                 var iModelo = (from c in Modelo.Empresas
                                select c).FirstOrDefault();
 
-                iModelo.NombreEmpresa = iNombreComercial;
+                iModelo.NombreEmpresa = striNombreComercial;
                 iModelo.CorreoElectronico = iCorreoElectronicoEmpresa;
                 iModelo.Telefono = iTelefonoEmpresa;
                 iModelo.UbicacionID = iUbicacionID;
@@ -183,6 +215,115 @@ namespace WEBhecsa.Clases
                 iModelo.TelefonoContacto = strTelefonoContacto;
                 iModelo.UbicacionID = ubicacionIDn;
                 iModelo.Clave = ClaveNueva;
+
+                Modelo.SaveChanges();
+            }
+            return true;
+        }
+
+        internal static bool AgregaEmpresaDatosFiscales(string iRFCDatosFiscales, string iRazonSocialDatosFiscales, string iCorreoElectronicoDatosFiscales, string iTelefonoDatosFiscales, string iCalleNumeroDatosFiscales, string iCPDatosFiscales, string iColoniaDatosFiscales)
+        {
+            string striRazonSocialDatosFiscales = string.Empty, striCalleNumeroDatosFiscales = string.Empty;
+
+            TextInfo CINombreEmpresa = new CultureInfo("es-MX", false).TextInfo;
+            TextInfo CICalleNum = new CultureInfo("es-MX", false).TextInfo;
+
+            striRazonSocialDatosFiscales = CINombreEmpresa.ToTitleCase(iRazonSocialDatosFiscales.ToLower());
+            striCalleNumeroDatosFiscales = CICalleNum.ToTitleCase(iCalleNumeroDatosFiscales.ToLower());
+
+            Guid iEmpresaID, iUbicacionID;
+            using (var Modelo = new DatosHECSAEntities())
+            {
+                var iModeloU = (from a in Modelo.Empresas
+                                select a).ToList();
+
+                iEmpresaID = Guid.Parse(iModeloU[0].EmpresaID.ToString());
+            }
+
+            iUbicacionID = Guid.NewGuid();
+
+            var iRegistro = new DatosHECSAEntities();
+
+            var iUbicaciones = new Ubicaciones
+            {
+                UbicacionID = iUbicacionID,
+                TipoUbicacionID = 2,
+                CalleNumero = striCalleNumeroDatosFiscales,
+                CodigoPostal = iCPDatosFiscales,
+                ColoniaID = iColoniaDatosFiscales,
+                EstatusRegistroID = 1,
+                FechaRegistro = DateTime.Now
+            };
+
+            iRegistro.Ubicaciones.Add(iUbicaciones);
+
+            var iDatosFiscales = new DatosFiscales
+            {
+                DatoFiscalID = Guid.NewGuid(),
+                RFC = iRFCDatosFiscales,
+                RazonSocial = striRazonSocialDatosFiscales,
+                CorreoElectronico = iCorreoElectronicoDatosFiscales,
+                Telefono = iTelefonoDatosFiscales,
+                UbicacionID = iUbicacionID,
+                EstatusRegistroID = 1,
+                FechaRegistro = DateTime.Now,
+                EmpresaID = iEmpresaID
+            };
+
+            iRegistro.DatosFiscales.Add(iDatosFiscales);
+            iRegistro.SaveChanges();
+
+            using (var Modelo = new DatosHECSAEntities())
+            {
+                var iModelo = (from c in Modelo.DatosFiscales
+                               select c).FirstOrDefault();
+
+                iModelo.RFC = iRFCDatosFiscales;
+                iModelo.RazonSocial = striRazonSocialDatosFiscales;
+                iModelo.CorreoElectronico = iColoniaDatosFiscales;
+                iModelo.Telefono = iTelefonoDatosFiscales;
+
+                Modelo.SaveChanges();
+            }
+
+            return true;
+        }
+
+        internal static bool ActualizaEmpresaDatosFiscales(string iRFCDatosFiscales, string iRazonSocialDatosFiscales, string iCorreoElectronicoDatosFiscales, string iTelefonoDatosFiscales, string iCalleNumeroDatosFiscales, string iCPDatosFiscales, string iColoniaDatosFiscales)
+        {
+            string striRazonSocialDatosFiscales = string.Empty, striCalleNumeroDatosFiscales = string.Empty;
+
+            TextInfo CINombreEmpresa = new CultureInfo("es-MX", false).TextInfo;
+            TextInfo CICalleNum = new CultureInfo("es-MX", false).TextInfo;
+
+            striRazonSocialDatosFiscales = CINombreEmpresa.ToTitleCase(iRazonSocialDatosFiscales.ToLower());
+            striCalleNumeroDatosFiscales = CICalleNum.ToTitleCase(iCalleNumeroDatosFiscales.ToLower());
+
+            Guid iEmpresaID, iUbicacionID;
+            using (var Modelo = new DatosHECSAEntities())
+            {
+                var iModelo = (from c in Modelo.Empresas
+                               select c).FirstOrDefault();
+                iEmpresaID = iModelo.EmpresaID;
+               
+
+                var iModeloDF = (from c in Modelo.DatosFiscales
+                                 where c.EmpresaID == iEmpresaID
+                                 select c).FirstOrDefault();
+                iUbicacionID = Guid.Parse(iModeloDF.UbicacionID.ToString());
+
+                iModeloDF.RFC = iRFCDatosFiscales;
+                iModeloDF.RazonSocial = striRazonSocialDatosFiscales;
+                iModeloDF.CorreoElectronico = iCorreoElectronicoDatosFiscales;
+                iModeloDF.Telefono = iTelefonoDatosFiscales;
+
+                var iModeloU = (from c in Modelo.Ubicaciones
+                                where c.UbicacionID == iUbicacionID
+                                select c).FirstOrDefault();
+
+                iModeloU.CalleNumero = iCalleNumeroDatosFiscales;
+                iModeloU.CodigoPostal = iCPDatosFiscales;
+                iModeloU.ColoniaID = iColoniaDatosFiscales;
 
                 Modelo.SaveChanges();
             }

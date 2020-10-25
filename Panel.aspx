@@ -46,8 +46,7 @@
             <ContentTemplate>
             </ContentTemplate>
         </asp:UpdatePanel>
-        <asp:UpdatePanel ID="upPanel" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
+      
                 <div id="app">
                     <div id="sidebar" class="active">
                         <div class="sidebar-wrapper active">
@@ -69,73 +68,6 @@
                                             <span>Resumen</span>
                                         </a>
                                     </li>
-
-                                    <li class="sidebar-item  has-sub">
-                                        <a href="#" class="sidebar-link">
-                                            <i data-feather="triangle" width="20"></i>
-                                            <span>Aula Intelimundo</span>
-                                        </a>
-
-                                        <ul class="submenu ">
-
-                                            <li>
-                                                <a href="#">Alert</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">Badge</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">Breadcrumb</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">Buttons</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">Card</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">Carousel</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">Dropdowns</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">List Group</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">Modal</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">Navs</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">Pagination</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">Progress</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">Spinners</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">Tooltips</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
                                     <li class="sidebar-item  has-sub">
                                         <a href="#" class="sidebar-link">
                                             <i data-feather="briefcase" width="20"></i>
@@ -148,69 +80,80 @@
                                                 <ContentTemplate>
                                                     <li>
                                                         <asp:LinkButton ID="lkbNotificaciones" runat="server" OnClick="lkbNotificaciones_Click">
-                                                            <span>Notificaciones <i class="fa fa-circle" runat="server" id="iNotificaciones" style="color: #dc3545"></i></span>
+                                                            <span>Notificaciones</span>
                                                         </asp:LinkButton>
                                                     </li>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
-
 
                                             <asp:UpdatePanel ID="upEmpresa" runat="server" UpdateMode="Conditional">
                                                 <ContentTemplate>
                                                     <li>
                                                         <asp:LinkButton ID="lkbEmpresa" runat="server" OnClick="lkbEmpresa_Click">
-                                                            <span>Empresa <i class="fa fa-circle" runat="server" id="i1" style="color: #dc3545"></i></span>
+                                                            <span>Empresa</span>
                                                         </asp:LinkButton>
                                                     </li>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
-
                                         </ul>
                                     </li>
 
                                     <li class="sidebar-title">Administración</li>
-
-                                    <li class="sidebar-item  ">
-                                        <a href="#" class="sidebar-link">
-                                            <i data-feather="layout" width="20"></i>
-                                            <span>Centros</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="sidebar-item  ">
-                                        <a href="#" class="sidebar-link">
-                                            <i data-feather="layers" width="20"></i>
-                                            <span>Usuarios</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="sidebar-item  ">
-                                        <a href="#" class="sidebar-link">
-                                            <i data-feather="grid" width="20"></i>
-                                            <span>Productos / Servicios</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="sidebar-item  ">
-                                        <a href="#" class="sidebar-link">
-                                            <i data-feather="file-plus" width="20"></i>
-                                            <span>Proveedores</span>
-                                        </a>
-                                    </li>
-
+                                    
+                                    <asp:UpdatePanel ID="upUsuarios" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                             <li class="sidebar-item">
+                                                <asp:LinkButton ID="lkbUsuarios" runat="server" CssClass="sidebar-link" OnClick="lkbUsuarios_Click">
+                                                    <i data-feather="layers" width="20"></i>
+                                                            <span>Usuarios</span>
+                                                </asp:LinkButton>
+                                            </li>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    <asp:UpdatePanel ID="upProveedores" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                          <li class="sidebar-item">
+                                                <asp:LinkButton ID="lkbProveedores" runat="server" CssClass="sidebar-link" OnClick="lkbProveedores_Click">
+                                                    <i data-feather="briefcase" width="20"></i>
+                                                            <span>Proveedores</span>
+                                                </asp:LinkButton>
+                                            </li>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    <asp:UpdatePanel ID="upProductos" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                         <li class="sidebar-item">
+                                                <asp:LinkButton ID="lkbProductos" runat="server" CssClass="sidebar-link" OnClick="lkbProductos_Click">
+                                                    <i data-feather="briefcase" width="20"></i>
+                                                            <span>Productos</span>
+                                                </asp:LinkButton>
+                                            </li>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    <asp:UpdatePanel ID="UpdatePanel8" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                      <li class="sidebar-item">
+                                                <asp:LinkButton ID="LinkButton3" runat="server" CssClass="sidebar-link" OnClick="lkbUsuarios_Click">
+                                                    <i data-feather="briefcase" width="20"></i>
+                                                            <span>Clientes</span>
+                                                </asp:LinkButton>
+                                            </li>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                    
                                     <li class="sidebar-title">Registros</li>
 
                                     <li class="sidebar-item  ">
                                         <a href="#" class="sidebar-link">
                                             <i data-feather="file-plus" width="20"></i>
-                                            <span>Compras</span>
+                                            <span>Orden de Compras</span>
                                         </a>
                                     </li>
 
                                     <li class="sidebar-item  ">
                                         <a href="#" class="sidebar-link">
                                             <i data-feather="file-plus" width="20"></i>
-                                            <span>Ventas</span>
+                                            <span>Cotizacion</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -579,7 +522,6 @@
                                                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                                         <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">Editar</a>
                                                     </div>
-
                                                 </div>
 
                                                 <div class="col-9">
@@ -654,29 +596,33 @@
                                         <div class="col-md-6">
                                             <h5 class="card-title">Datos Empresa</h5>
                                             <div class="row">
-                                                <div class="col-3">
-                                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                                        <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">Editar</a>
-                                                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Datos Fiscales</a>
-
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-9">
-                                                    <div class="tab-content" id="v-pills-tabContent">
-                                                        <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                                <div class="col-12">
+                                                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                        <li class="nav-item">
+                                                            <asp:LinkButton ID="lkbEditaEmpresa" runat="server" CssClass="nav-item nav-link" role="tab" aria-selected="true" OnClick="lkbEditaEmpresa_Click">Editar
+                                                            </asp:LinkButton>
+                                                            <%--<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>--%>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <asp:LinkButton ID="lkbEditaEmpresaDatosFiscales" runat="server" CssClass="nav-item nav-link" role="tab" aria-controls="home" aria-selected="true" OnClick="lkbEditaEmpresaDatosFiscales_Click">Datos Fiscales
+                                                            </asp:LinkButton>
+                                                        </li>
+                                                    </ul>
+                                                    <hr />
+                                                    <div class="tab-content" id="myTabContent">
+                                                        <asp:Panel ID="pnlEditaEmpresa" runat="server" Visible="false">
                                                             <div class="row">
 
                                                                 <div class="col-md-4 col-12">
                                                                     <div class="form-group">
                                                                         <label for="username-column" tooltip="Para Notificaciones">*Nombre Comercial</label>
-                                                                        <input type="text" runat="server" id="iNombreComercial" class="form-control" required>
+                                                                        <input type="text" runat="server" id="iNombreComercial" class="form-control" required onkeyup="this.value = this.value.toUpperCase();">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4 col-12">
                                                                     <div class="form-group">
                                                                         <label for="first-name-column">*Correo Electrónico</label>
-                                                                        <input type="text" runat="server" id="iCorreoElectronicoEmpresa" class="form-control" required>
+                                                                        <input type="email" runat="server" id="iCorreoElectronicoEmpresa" class="form-control" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4 col-12">
@@ -688,7 +634,7 @@
                                                                 <div class="col-md-12 col-12">
                                                                     <div class="form-group">
                                                                         <label for="last-name-column">*Calle y Numero</label>
-                                                                        <input type="text" runat="server" id="iCalleNumEmpresa" class="form-control" required>
+                                                                        <input type="text" runat="server" id="iCalleNumEmpresa" class="form-control" required onkeyup="this.value = this.value.toUpperCase();">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -703,7 +649,6 @@
                                                                                 <input type="text" class="form-control" runat="server" id="iCPEmpresa" placeholder="*Código Postal" aria-label="Recipient's username" aria-describedby="button-addon2" required>
                                                                                 <asp:LinkButton ID="lkbCP" runat="server" CssClass="btn btn-outline-secondary" TabIndex="5" OnClick="lkbCP_Click">Buscar
                                                                                 </asp:LinkButton>
-
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6">
@@ -733,22 +678,173 @@
                                                                         <asp:Button CssClass="btn btn-primary float-right" type="submit" ID="btnRegistrarEmpresa" runat="server" Text="Registrar" OnClick="btnRegistrarEmpresa_Click" />
                                                                     </ContentTemplate>
                                                                 </asp:UpdatePanel>
-                                                                <asp:UpdateProgress ID="UpdateProgress1" runat="server" DynamicLayout="true">
-                                                                    <ProgressTemplate>
-                                                                        <div id="overlay">
-                                                                            <div class="center">
-                                                                                <img alt="" src="assets/image/ajax-loader.gif" />
+                                                            </div>
+                                                        </asp:Panel>
+
+                                                        <asp:Panel ID="pnlEditaEmpresaDatosFiscales" runat="server" Visible="false">
+                                                            <div class="row">
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="username-column" tooltip="Para Notificaciones">*RFC</label>
+                                                                        <input type="text" runat="server" id="iRFCDatosFiscales" class="form-control" required onkeyup="this.value = this.value.toUpperCase();">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-8 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="username-column" tooltip="Para Notificaciones">*Razon Social</label>
+                                                                        <input type="text" runat="server" id="iRazonSocialDatosFiscales" class="form-control" required onkeyup="this.value = this.value.toUpperCase();">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="first-name-column">*Correo Electrónico</label>
+                                                                        <input type="email" runat="server" id="iCorreoElectronicoDatosFiscales" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="last-name-column">*Teléfono</label>
+                                                                        <input type="text" runat="server" id="iTelefonoDatosFiscales" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="last-name-column">*Calle y Numero</label>
+                                                                        <input type="text" runat="server" id="iCalleNumeroDatosFiscales" class="form-control" required onkeyup="this.value = this.value.toUpperCase();">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <asp:UpdatePanel ID="upCPDatosFiscales" runat="server" UpdateMode="Conditional">
+                                                                <ContentTemplate>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 mb-1">
+                                                                            <div class="input-group mb-3">
+                                                                                <span class="input-group-text" id="basic-addon1">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                                                                        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+                                                                                <input type="text" class="form-control" runat="server" id="iCPDatosFiscales" placeholder="*Código Postal" aria-label="Recipient's username" aria-describedby="button-addon2" required>
+                                                                                <asp:LinkButton ID="lkbCPDatosFiscales" runat="server" CssClass="btn btn-outline-secondary" TabIndex="5" OnClick="lkbCPDatosFiscales_Click">Buscar
+                                                                                </asp:LinkButton>
                                                                             </div>
                                                                         </div>
-                                                                    </ProgressTemplate>
-                                                                </asp:UpdateProgress>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <select class="form-control" runat="server" id="iColoniaDatosFiscales" required="required" tabindex="6"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" runat="server" id="iMunicipioDatosFiscales" placeholder="Municipio" disabled="disabled" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" runat="server" id="iEstadoDatosFiscales" placeholder="Estado" disabled="disabled" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                            <div class="clearfix">
+                                                                <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                                                                    <ContentTemplate>
+                                                                        <asp:Button CssClass="btn btn-primary float-right" type="submit" ID="btnRegistrarDatosFiscales" runat="server" Text="Registrar" OnClick="btnRegistrarDatosFiscales_Click" />
+                                                                    </ContentTemplate>
+                                                                </asp:UpdatePanel>
                                                             </div>
-                                                        </div>
-                                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                                            Integer interdum diam eleifend metus lacinia, quis gravida eros mollis. Fusce non sapien sit amet magna dapibus
-                                        ultrices. Morbi tincidunt magna ex, eget faucibus sapien bibendum non. Duis a mauris ex. Ut finibus risus sed massa
-                                        mattis porta. Aliquam sagittis massa et purus efficitur ultricies.
-                                                        </div>
+                                                        </asp:Panel>
+
+                                                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                            <asp:UpdatePanel ID="upUsuariosF" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:Panel ID="pnlUsuarios" runat="server" Visible="false">
+                                        <div class="col-md-6">
+                                            <h5 class="card-title">Control Usuarios</h5>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <hr />
+                                                    <div class="tab-content" id="myTabContent">
+                                                        <asp:Panel ID="pnlAgregaUsuarios" runat="server" Visible="true">
+                                                            <div class="row">
+
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="username-column" tooltip="Para Notificaciones">*Nombre Comercial</label>
+                                                                        <input type="text" runat="server" id="Text1" class="form-control" required onkeyup="this.value = this.value.toUpperCase();">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="first-name-column">*Correo Electrónico</label>
+                                                                        <input type="email" runat="server" id="iCorreoElectronicoUsuarios" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="last-name-column">*Teléfono</label>
+                                                                        <input type="text" runat="server" id="iTelefonoUsuarios" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="last-name-column">*Calle y Numero</label>
+                                                                        <input type="text" runat="server" id="iCalleNumUsuarios" class="form-control" required onkeyup="this.value = this.value.toUpperCase();">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <asp:UpdatePanel ID="UpdatePanel6" runat="server" UpdateMode="Conditional">
+                                                                <ContentTemplate>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 mb-1">
+                                                                            <div class="input-group mb-3">
+                                                                                <span class="input-group-text" id="basic-addon1">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+                                                                                        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+                                                                                <input type="text" class="form-control" runat="server" id="iCPUsuarios" placeholder="*Código Postal" aria-label="Recipient's username" aria-describedby="button-addon2" required>
+                                                                                <asp:LinkButton ID="lkbCPUsuarios" runat="server" CssClass="btn btn-outline-secondary" TabIndex="5" OnClick="lkbCPUsuarios_Click">Buscar
+                                                                                </asp:LinkButton>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <select class="form-control" runat="server" id="iColoniaUsuarios" required="required" tabindex="6"></select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" runat="server" id="iMunicipioUsuarios" placeholder="Municipio" disabled="disabled" />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+
+                                                                                <input type="text" class="form-control" runat="server" id="iEstadoUsuarios" placeholder="Estado" disabled="disabled" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                            <div class="clearfix">
+                                                                <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                                                    <ContentTemplate>
+                                                                        <asp:Button CssClass="btn btn-primary float-right" type="submit" ID="btnRegistrarUsuarios" runat="server" Text="Registrar" OnClick="btnRegistrarEmpresa_Click" />
+                                                                    </ContentTemplate>
+                                                                </asp:UpdatePanel>
+                                                            </div>
+                                                        </asp:Panel>
+
+                                                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -773,9 +869,7 @@
                         </footer>
                     </div>
                 </div>
-            </ContentTemplate>
-
-        </asp:UpdatePanel>
+         
         <asp:Button ID="btnShowPopup" runat="server" Style="display: none" />
         <asp:Panel ID="panPopup" Style="display: none" CssClass="pnlBackGround" runat="server">
             <asp:UpdatePanel ID="upModal" runat="server" UpdateMode="Conditional">

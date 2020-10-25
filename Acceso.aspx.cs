@@ -11,6 +11,24 @@ namespace WEBhecsa
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (!IsPostBack)
+                {
+                    try
+                    {
+             
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                Response.Redirect("Acceso.aspx");
+            }
         }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)

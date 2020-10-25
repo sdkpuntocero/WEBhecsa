@@ -11,8 +11,8 @@
 
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/app.css">
-     <style>
-         .modalBackground {
+    <style>
+        .modalBackground {
             background-color: white;
             filter: alpha(opacity=50);
             opacity: 0.7;
@@ -27,12 +27,12 @@
             text-align: center;
             background-color: White;
         }
+
         .footer {
             position: fixed;
             left: 0;
             bottom: 0;
             width: 100%;
-
             text-align: center;
         }
     </style>
@@ -55,7 +55,7 @@
                                 </div>
 
                                 <div class="form-group position-relative has-icon-left">
-                                    <label for="username" >Usuario</label>
+                                    <label for="username">Usuario</label>
                                     <div class="position-relative">
                                         <input type="text" class="form-control" runat="server" id="iUsuario" required onkeyup="this.value = this.value.toLowerCase();">
                                         <div class="form-control-icon">
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="form-group position-relative has-icon-left">
                                     <div class="clearfix">
-                                        <label for="password" >Clave</label>
+                                        <label for="password">Clave</label>
                                         <a href="auth-forgot-password.html" class='float-right'>
                                             <small>¿Se te olvidó tu contraseña?</small>
                                         </a>
