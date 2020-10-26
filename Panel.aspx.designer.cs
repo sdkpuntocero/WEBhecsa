@@ -222,6 +222,24 @@ namespace WEBhecsa
         protected global::System.Web.UI.WebControls.Panel pnlNotificacionesF;
 
         /// <summary>
+        /// lkbEditaNotificaciones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lkbEditaNotificaciones;
+
+        /// <summary>
+        /// pnlEditaNotificaciones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlEditaNotificaciones;
+
+        /// <summary>
         /// iCorreoElectronicoNotificacion control.
         /// </summary>
         /// <remarks>
@@ -609,13 +627,49 @@ namespace WEBhecsa
         protected global::System.Web.UI.WebControls.Panel pnlAgregaUsuarios;
 
         /// <summary>
-        /// Text1 control.
+        /// upGridUsuarios control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText Text1;
+        protected global::System.Web.UI.UpdatePanel upGridUsuarios;
+
+        /// <summary>
+        /// gvGridUsuarios control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvGridUsuarios;
+
+        /// <summary>
+        /// txtNombresUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNombresUsuario;
+
+        /// <summary>
+        /// txtApellidoPaternoUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtApellidoPaternoUsuario;
+
+        /// <summary>
+        /// txtApellidoMaternoUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtApellidoMaternoUsuario;
 
         /// <summary>
         /// iCorreoElectronicoUsuarios control.

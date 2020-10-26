@@ -419,6 +419,7 @@ namespace WEBhecsa
 
         protected void lkbUsuarios_Click(object sender, EventArgs e)
         {
+            this.BindGridUsuarios();
             CargaCPUsuarios();
             pnlResumen.Visible = false;
             upResumen.Update();
@@ -450,8 +451,6 @@ namespace WEBhecsa
                                     }).FirstOrDefault();
                     if (iModeloU != null)
                     {
-
-
                         using (DataSet ListCP = CodigoPostal.FiltroCP(iModeloU.CodigoPostal))
                         {
                             if (ListCP.Tables[0].Rows.Count == 0)
@@ -531,6 +530,114 @@ namespace WEBhecsa
 
             iColoniaUsuarios.Focus();
             upPage.Update();
+        }
+
+        protected void lkbEditaNotificaciones_Click(object sender, EventArgs e)
+        {
+            pnlEditaNotificaciones.Visible = true;
+            upNotificacionesF.Update();
+        }
+
+     
+
+        protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int customerId = Convert.ToInt32(gvGridUsuarios.DataKeys[e.RowIndex].Values[0]);
+
+            using (DatosHECSAEntities Modelo = new DatosHECSAEntities())
+            {
+                Usuarios deptDelete = Modelo.Usuarios.Find(customerId);
+                Modelo.Usuarios.Remove(deptDelete);
+                Modelo.SaveChanges();
+            }
+            this.BindGridUsuarios();
+        }
+
+
+   
+  
+
+        private void BindGridUsuarios()
+        {
+            using (DatosHECSAEntities Modelo = new DatosHECSAEntities())
+            {
+                var iModelo = (from a in Modelo.Usuarios
+                               select new
+                               {
+                                   a.UsuarioID,
+                                   a.CodigoUsuario,
+                                   a.Nombres,
+                                   a.ApellidoPaterno,
+                                   a.ApellidoMaterno,
+                                   a.CorreoPersonal,
+                                   a.FechaRegistro
+                               }).ToList();
+
+                gvGridUsuarios.DataSource = iModelo;
+                gvGridUsuarios.DataBind();
+            }
+        }
+
+        protected void gvGridUsuarios_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            //if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != gvGridUsuarios.EditIndex)
+            //{
+            //    (e.Row.Cells[6].Controls[0] as LinkButton).Attributes["onclick"] = "return confirm('¿Quieres actualizar esta fila?');";
+            //}
+        }
+
+        protected void gvGridUsuarios_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvGridUsuarios.EditIndex = e.NewEditIndex;
+            this.BindGridUsuarios();
+        }
+
+        protected void gvGridUsuarios_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvGridUsuarios.EditIndex = -1;
+            this.BindGridUsuarios();
+        }
+
+        protected void gvGridUsuarios_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvGridUsuarios.PageIndex = e.NewPageIndex;
+            this.BindGridUsuarios();
+        }
+
+        protected void gvGridUsuarios_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            GridViewRow row = gvGridUsuarios.Rows[e.RowIndex];
+            Guid UsuarioId = Guid.Parse(gvGridUsuarios.DataKeys[e.RowIndex].Values[0].ToString());
+
+            string strNombres = (row.FindControl("txtNombres") as TextBox).Text;
+            string strApellidoPaterno = (row.FindControl("txtApellidoPaterno") as TextBox).Text;
+            string strApellidoMaterno = (row.FindControl("txtApellidoMaterno") as TextBox).Text;
+            string strCorreoPersonal = (row.FindControl("txtCorreoPersonal") as TextBox).Text;
+
+            using (DatosHECSAEntities Modelo = new DatosHECSAEntities())
+            {
+                var iModelo = (from c in Modelo.Usuarios
+                               where c.UsuarioID == UsuarioId
+                               select c).FirstOrDefault();
+
+                iModelo.Nombres = strNombres;
+                iModelo.ApellidoPaterno = strApellidoPaterno;
+                iModelo.ApellidoMaterno = strApellidoMaterno;
+                iModelo.CorreoPersonal = strCorreoPersonal;
+
+                Modelo.SaveChanges();
+            }
+            this.BindGridUsuarios();
+
+            gvGridUsuarios.EditIndex = -1;
+            this.BindGridUsuarios();
+        }
+
+        protected void gvGridUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtNombresUsuario.Value = gvGridUsuarios.SelectedRow.Cells[1].Text;
+            txtApellidoPaternoUsuario.Value = gvGridUsuarios.SelectedRow.Cells[2].Text;
+            txtApellidoMaternoUsuario.Value = gvGridUsuarios.SelectedRow.Cells[3].Text;
         }
     }
 }
